@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Sauryaman Bisen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone</title>
+    <!-- FontAwesome CDN for awesome icons from google -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="Style/Amazon.css">
+</head>
+
+<body>
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="nav-left">
+            <a href="#" class="nav-logo border-glow">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo">
+            </a>
+            <div class="nav-location border-glow">
+                <i class="fa-solid fa-location-dot"></i>
+                <div class="location-text">
+                    <span class="location-line1">Delivering to</span>
+                    <span class="location-line2">Update location</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-search">
+            <select class="search-select">
+                <option>All</option>
+                <option>Electronics</option>
+                <option>Fashion</option>
+                <option>Home</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Amazon">
+            <button class="search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+
+        <div class="nav-right">
+            <div class="nav-language border-glow">
+                <img src="https://flagcdn.com/w20/us.png" alt="US Flag">
+                <span>EN</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <div class="nav-signin border-glow">
+                <span class="nav-line1">Hello, sign in</span>
+                <span class="nav-line2">Account & Lists <i class="fa-solid fa-caret-down"></i></span>
+            </div>
+            <div class="nav-returns border-glow">
+                <span class="nav-line1">Returns</span>
+                <span class="nav-line2">& Orders</span>
+            </div>
+            <a href="#" class="nav-cart border-glow">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+                <span class="nav-line2">Cart</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="sub-nav">
+        <div class="sub-nav-left">
+            <a href="#" class="menu-icon border-glow"><i class="fa-solid fa-bars"></i> All</a>
+            <a href="#" class="border-glow">Today's Deals</a>
+            <a href="#" class="border-glow">Customer Service</a>
+            <a href="#" class="border-glow">Registry</a>
+            <a href="#" class="border-glow">Gift Cards</a>
+            <a href="#" class="border-glow">Sell</a>
+        </div>
+        <div class="sub-nav-right">
+            <a href="#" class="border-glow">Shop great deals now</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="hero-section">
+            <div class="hero-image">
+                <img class="hero-img-element" src="public/image/hero-banner.jpeg" alt="Hero Banner">
+                <div class="hero-banner-content">
+                    <h1>Up to 60% off</h1>
+                    <p>Offers on clothing, footwear & more. Revamp your wardrobe and home.</p>
+                    <a href="#" class="shop-now-btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="hero-gradient"></div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="products-container">
+            <div class="product-card">
+                <div class="card-header">
+                    <h3 class="card-title">Revamp your home in style</h3>
+                </div>
+                <div class="card-content">
+                    <div class="product-grid">
+                        <div class="product-item">
+                            <img src="public/image/clock.png" alt="Clock">
+                            <span class="product-item-label">Clocks</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/furniture.png" alt="Furniture">
+                            <span class="product-item-label">Furniture</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/mirrors.png" alt="Mirrors">
+                            <span class="product-item-label">Mirrors</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/plants.png" alt="Plants">
+                            <span class="product-item-label">Plants</span>
+                        </div>
+                    </div>
+                    <a href="#" class="explore-link">Explore all</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-header">
+                    <h3 class="card-title">Starting ₹149 | Headphones</h3>
+                </div>
+                <div class="card-content">
+                    <div class="product-grid">
+                        <div class="product-item">
+                            <img src="public/image/boat.png" alt="boAt">
+                            <span class="product-item-label">boAt</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/boult.png" alt="Headphones">
+                            <span class="product-item-label">boult</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/zebronics.png" alt="Zebronics">
+                            <span class="product-item-label">Zebronics</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/noise.png" alt="Noise">
+                            <span class="product-item-label">Noise</span>
+                        </div>
+                    </div>
+                    <a href="#" class="explore-link">Explore all</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-header">
+                    <h3 class="card-title">Appliances for your home</h3>
+                </div>
+                <div class="card-content">
+                    <div class="product-grid">
+                        <div class="product-item">
+                            <img src="public/image/vacuum.png" alt="Vacuum">
+                            <span class="product-item-label">Vacuum cleaner</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/mixer.png" alt="Mixer">
+                            <span class="product-item-label">Mixer</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/refrigerator.png" alt="Refrigerator">
+                            <span class="product-item-label">Refrigerator</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/iron.png" alt="Iron">
+                            <span class="product-item-label">Iron</span>
+                        </div>
+                    </div>
+                    <a href="#" class="explore-link">Explore all</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-header">
+                    <h3 class="card-title">Starting at ₹399 | Fashion</h3>
+                </div>
+                <div class="card-content">
+                    <div class="product-grid">
+                        <div class="product-item">
+                            <img src="public/image/jeans.png" alt="Jeans">
+                            <span class="product-item-label">Jeans</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/shirt.png" alt="Shirt">
+                            <span class="product-item-label">Shirt</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/suit.png" alt="Suit">
+                            <span class="product-item-label">Suit</span>
+                        </div>
+                        <div class="product-item">
+                            <img src="public/image/boots.png" alt="Boots">
+                            <span class="product-item-label">Boots</span>
+                        </div>
+                    </div>
+                    <a href="#" class="explore-link">Explore all</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#" class="back-to-top">Back to top</a>
+        <div class="footer-links">
+            <div class="link-column">
+                <h3>Get to Know Us</h3>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">About Amazon</a>
+            </div>
+            <div class="link-column">
+                <h3>Make Money with Us</h3>
+                <a href="#">Sell products</a>
+                <a href="#">Sell on Amazon Business</a>
+                <a href="#">Become an Affiliate</a>
+            </div>
+            <div class="link-column">
+                <h3>Amazon Payment Products</h3>
+                <a href="#">Amazon Business Card</a>
+                <a href="#">Shop with Points</a>
+                <a href="#">Reload Your Balance</a>
+            </div>
+            <div class="link-column">
+                <h3>Let Us Help You</h3>
+                <a href="#">Your Account</a>
+                <a href="#">Your Orders</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo">
+            </div>
+            <p>&copy; 2026, Amazon.com, Inc. or its affiliates</p>
+        </div>
+    </footer>
+</body>
+
+</html>
