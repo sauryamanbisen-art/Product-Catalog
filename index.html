@@ -1,244 +1,1487 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html class="dark" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Sauryaman Bisen">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon Clone</title>
-    <!-- FontAwesome CDN for awesome icons from google -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="Style/Amazon.css">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LeapCart | Premium Fashion & Electronics Catalog</title>
+    <!-- Tailwind CSS with Forms and Container Queries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts Inter & Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <!-- Custom styling system -->
+    <link href="css/styles.css" rel="stylesheet" />
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#F7F8FA",
+                        "on-primary": "#11151C",
+                        "secondary": "#00B8A9",
+                        "on-secondary": "#11151C",
+                        "surface": "#10141C",
+                        "on-surface": "#F7F8FA",
+                        "background": "#080F14",
+                        "on-background": "#F7F8FA",
+                        "surface-variant": "#1F2430",
+                        "on-surface-variant": "#C8D0DA",
+                        "outline": "#323848",
+                        "outline-variant": "rgba(255,255,255,0.08)",
+                        "error": "#EF4444",
+                        "on-error": "#11151C",
+                        "error-container": "rgba(239,68,68,0.15)",
+                        "primary-container": "#202633",
+                        "on-primary-container": "#C8D0DA",
+                        "secondary-container": "#1F2430",
+                        "on-secondary-container": "#C8D0DA",
+                        "surface-container-low": "#171C24",
+                        "surface-container": "#1F2430",
+                        "surface-container-high": "#262C39",
+                        "surface-container-highest": "#323848",
+                        "surface-dim": "#10141C",
+                        "surface-bright": "#202633",
+                        "inverse-surface": "#F7F8FA",
+                        "inverse-on-surface": "#11151C",
+                        "tertiary": "#FFC857",
+                        "on-tertiary": "#11151C"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "unit-2": "8px",
+                        "base": "4px",
+                        "unit-8": "32px",
+                        "unit-16": "64px",
+                        "unit-12": "48px",
+                        "unit-4": "16px",
+                        "unit-3": "12px",
+                        "unit-6": "24px",
+                        "unit-1": "4px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
 </head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden antialiased">
 
-<body>
-    <!-- Main Header -->
-    <header class="main-header">
-        <div class="nav-left">
-            <a href="#" class="nav-logo border-glow">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo">
-            </a>
-            <div class="nav-location border-glow">
-                <i class="fa-solid fa-location-dot"></i>
-                <div class="location-text">
-                    <span class="location-line1">Delivering to</span>
-                    <span class="location-line2">Update location</span>
+    <!-- TopNavBar -->
+    <header class="fixed top-0 left-0 right-0 z-50 pointer-events-none w-full flex justify-center">
+        <div class="backdrop-blur-gradient absolute inset-x-0 top-0 h-24 pointer-events-none z-0"></div>
+        <div class="relative w-full max-w-[90vw] mx-auto px-0 pt-4 flex justify-center z-10">
+            <div class="navbar-blur pointer-events-auto relative flex items-center justify-between w-full px-8 h-16 rounded-full z-10">
+                <!-- Mobile centered logo (hidden on desktop) -->
+                <a href="#" data-go-view="home" class="md:hidden absolute left-1/2 -translate-x-1/2 z-10 text-2xl font-black tracking-tight text-[var(--text-primary)] whitespace-nowrap">
+                    LeapCart
+                </a>
+                <div class="flex items-center gap-unit-2">
+                    <button id="mobile-menu-btn" class="md:hidden relative z-20 p-unit-2 hover:bg-white/10 transition-colors rounded-full flex items-center" aria-label="Toggle menu">
+                        <span class="material-symbols-outlined" id="mobile-menu-icon">menu</span>
+                    </button>
+                    <a href="#" data-go-view="home" class="hidden md:inline relative z-20 text-2xl font-black tracking-tight text-[var(--text-primary)] flex items-center shrink-0">
+                        LeapCart
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-unit-6 lg:gap-unit-8 h-full relative z-20">
+                    <a class="nav-link font-label-md text-label-md whitespace-nowrap relative py-2" href="#" data-view="catalog-section">
+                        Catalog
+                        <div class="nav-underline"></div>
+                    </a>
+                    <div class="group relative h-full flex items-center">
+                        <a class="nav-link font-label-md text-label-md whitespace-nowrap relative py-2" href="#" data-view="shop">
+                            Shop
+                            <div class="nav-underline"></div>
+                        </a>
+                        <div class="absolute top-[85%] left-1/2 -translate-x-1/2 pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto z-50">
+                            <div class="bg-[var(--bg-elevated)] border border-[var(--border-muted)] rounded-xl shadow-2xl p-4 flex gap-6 whitespace-nowrap">
+                                <button class="category-btn text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors text-xs font-bold font-label-md uppercase tracking-wider" data-category="All">All</button>
+                                <button class="category-btn text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors text-xs font-bold font-label-md uppercase tracking-wider" data-category="Apparel">Apparel</button>
+                                <button class="category-btn text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors text-xs font-bold font-label-md uppercase tracking-wider" data-category="Electronics">Electronics</button>
+                                <button class="category-btn text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors text-xs font-bold font-label-md uppercase tracking-wider" data-category="Accessories">Accessories</button>
+                                <button class="category-btn text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors text-xs font-bold font-label-md uppercase tracking-wider" data-category="Fitness">Fitness</button>
+                                <button class="category-btn text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors text-xs font-bold font-label-md uppercase tracking-wider" data-category="Home Decor">Home Decor</button>
+                                <button class="category-btn text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors text-xs font-bold font-label-md uppercase tracking-wider" data-category="Home & Kitchen">Home & Kitchen</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex items-center bg-[var(--bg-elevated)] rounded-full px-unit-4 py-unit-1 border border-[var(--border-muted)]">
+                        <span class="material-symbols-outlined text-[var(--text-muted)] text-[20px]">search</span>
+                        <input class="search-input bg-transparent border-none text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:ring-0 text-body-md w-28 xl:w-40 py-0.5" placeholder="Search products..." type="text"/>
+                    </div>
+                    <a class="nav-link font-label-md text-label-md whitespace-nowrap relative py-2" href="#" data-view="about-section">
+                        About Us
+                        <div class="nav-underline"></div>
+                    </a>
+                </div>
+                <div class="relative z-20 flex items-center gap-unit-2 md:gap-unit-4 text-[var(--text-primary)] shrink-0">
+                    <button class="hidden md:flex p-unit-1.5 md:p-unit-2 hover:bg-white/10 transition-colors rounded-full flex items-center">
+                        <span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                    </button>
+                    <button class="hidden md:flex p-unit-1.5 md:p-unit-2 hover:bg-white/10 transition-colors rounded-full flex items-center" data-go-view="order-tracker">
+                        <span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                    </button>
+                    <button class="cart-drawer-trigger p-unit-1.5 md:p-unit-2 hover:bg-white/10 transition-colors rounded-full flex items-center relative">
+                        <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                        <span class="cart-count absolute -top-1.5 -right-1.5 bg-[var(--accent-amber)] text-[var(--text-dark)] text-[11px] w-5.5 h-5.5 min-w-[22px] rounded-full flex items-center justify-center font-extrabold hidden shadow-lg shadow-[var(--accent-amber)]/30 border border-[var(--accent-amber)]/50">0</span>
+                    </button>
                 </div>
             </div>
-        </div>
-
-        <div class="nav-search">
-            <select class="search-select">
-                <option>All</option>
-                <option>Electronics</option>
-                <option>Fashion</option>
-                <option>Home</option>
-            </select>
-            <input type="text" class="search-input" placeholder="Search Amazon">
-            <button class="search-button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
-
-        <div class="nav-right">
-            <div class="nav-language border-glow">
-                <img src="https://flagcdn.com/w20/in.png" alt="India Flag">
-                <span>IN</span>
-                <i class="fa-solid fa-caret-down"></i>
-            </div>
-            <div class="nav-signin border-glow">
-                <span class="nav-line1">Hello, sign in</span>
-                <span class="nav-line2">Account & Lists <i class="fa-solid fa-caret-down"></i></span>
-            </div>
-            <div class="nav-returns border-glow">
-                <span class="nav-line1">Returns</span>
-                <span class="nav-line2">& Orders</span>
-            </div>
-            <a href="#" class="nav-cart border-glow">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="cart-count">0</span>
-                <span class="nav-line2">Cart</span>
-            </a>
         </div>
     </header>
 
-    <!-- Sub Navigation -->
-    <nav class="sub-nav">
-        <div class="sub-nav-left">
-            <a href="#" class="menu-icon border-glow"><i class="fa-solid fa-bars"></i> All</a>
-            <a href="#" class="border-glow">Today's Deals</a>
-            <a href="#" class="border-glow">Customer Service</a>
-            <a href="#" class="border-glow">Registry</a>
-            <a href="#" class="border-glow">Gift Cards</a>
-            <a href="#" class="border-glow">Sell</a>
-        </div>
-        <div class="sub-nav-right">
-            <a href="#" class="border-glow">Shop great deals now</a>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="hero-section">
-            <div class="hero-image">
-                <img class="hero-img-element" src="public/image/hero-banner.jpeg" alt="Hero Banner">
-                <div class="hero-banner-content">
-                    <h1>Up to 60% off</h1>
-                    <p>Offers on clothing, footwear & more. Revamp your wardrobe and home.</p>
-                    <a href="#" class="shop-now-btn">Shop Now</a>
-                </div>
-            </div>
-            <div class="hero-gradient"></div>
-        </div>
-
-        <!-- Product Grid -->
-        <div class="products-container">
-            <div class="product-card">
-                <div class="card-header">
-                    <h3 class="card-title">Revamp your home in style</h3>
-                </div>
-                <div class="card-content">
-                    <div class="product-grid">
-                        <div class="product-item">
-                            <img src="public/image/clock.png" alt="Clock">
-                            <span class="product-item-label">Clocks</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/furniture.png" alt="Furniture">
-                            <span class="product-item-label">Furniture</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/mirrors.png" alt="Mirrors">
-                            <span class="product-item-label">Mirrors</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/plants.png" alt="Plants">
-                            <span class="product-item-label">Plants</span>
+    <!-- ============================================== -->
+    <!-- MOBILE NAV PANEL -->
+    <!-- ============================================== -->
+    <div id="mobile-nav-panel" class="fixed inset-0 z-40 md:hidden hidden">
+        <div id="mobile-nav-backdrop" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div class="absolute right-0 top-24 bottom-0 w-72 max-w-[85vw] bg-[var(--bg-elevated)] border-l border-[var(--border-muted)] shadow-2xl p-unit-8 pt-unit-6 transform transition-transform duration-300 translate-x-full overflow-y-auto">
+            <nav class="flex flex-col gap-unit-2">
+                <a class="nav-link mobile-nav-link font-headline-md text-headline-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-unit-4 border-b border-[var(--border-muted)]" href="#" data-view="catalog-section">
+                    Catalog
+                </a>
+                <!-- Mobile Shop toggle (collapsible categories) -->
+                <div class="border-b border-[var(--border-muted)]">
+                    <button id="mobile-shop-toggle" class="mobile-nav-link font-headline-md text-headline-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-unit-4 flex items-center justify-between w-full text-left">
+                        <span>Shop</span>
+                        <span class="material-symbols-outlined text-[20px] transition-transform duration-200" id="mobile-shop-arrow">expand_more</span>
+                    </button>
+                    <div id="mobile-category-collapse" class="overflow-hidden transition-all duration-200 max-h-0">
+                        <div class="flex flex-col gap-unit-1 pl-unit-2 pb-unit-4">
+                            <button class="category-btn mobile-category-btn text-left text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors font-label-md text-label-md py-unit-2" data-category="All">All</button>
+                            <button class="category-btn mobile-category-btn text-left text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors font-label-md text-label-md py-unit-2" data-category="Apparel">Apparel</button>
+                            <button class="category-btn mobile-category-btn text-left text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors font-label-md text-label-md py-unit-2" data-category="Electronics">Electronics</button>
+                            <button class="category-btn mobile-category-btn text-left text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors font-label-md text-label-md py-unit-2" data-category="Accessories">Accessories</button>
+                            <button class="category-btn mobile-category-btn text-left text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors font-label-md text-label-md py-unit-2" data-category="Fitness">Fitness</button>
+                            <button class="category-btn mobile-category-btn text-left text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors font-label-md text-label-md py-unit-2" data-category="Home Decor">Home Decor</button>
+                            <button class="category-btn mobile-category-btn text-left text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition-colors font-label-md text-label-md py-unit-2" data-category="Home & Kitchen">Home & Kitchen</button>
                         </div>
                     </div>
-                    <a href="#" class="explore-link">Explore all</a>
                 </div>
-            </div>
+                <a class="nav-link mobile-nav-link font-headline-md text-headline-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-unit-4 border-b border-[var(--border-muted)]" href="#" data-view="about-section">
+                    About Us
+                </a>
+                <a class="mobile-nav-link font-headline-md text-headline-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-unit-4 border-b border-[var(--border-muted)]" href="#" data-go-view="order-tracker">
+                    <span class="flex items-center gap-unit-3">
+                        <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                        Track Order
+                    </span>
+                </a>
+                <button class="cart-drawer-trigger mobile-nav-link font-headline-md text-headline-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-unit-4 flex items-center gap-unit-3 w-full text-left" aria-label="Open cart">
+                    <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                    <span>Cart</span>
+                    <span class="cart-count ml-auto bg-[var(--accent-amber)] text-[var(--text-dark)] text-[11px] w-5.5 h-5.5 min-w-[22px] rounded-full flex items-center justify-center font-extrabold hidden shadow-lg">0</span>
+                </button>
+            </nav>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="card-header">
-                    <h3 class="card-title">Starting ₹149 | Headphones</h3>
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 1: LUXECART HOME -->
+    <!-- ============================================== -->
+    <div id="view-home" class="view-container active">
+        <main class="max-w-7xl mx-auto px-unit-4 md:px-unit-12 pt-24 pb-unit-8">
+            <!-- Hero Showcase Section -->
+            <section class="relative w-full md:h-[540px] h-[300px] mb-unit-16 rounded-xl overflow-hidden shadow-xl border border-[var(--border-muted)]">
+                <div class="absolute inset-0 z-0">
+                    <img alt="LeapCart Hero Showcase" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" />
+                    <div class="absolute inset-0 hero-gradient"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-[var(--accent-teal)]/15 mix-blend-color z-0"></div>
                 </div>
-                <div class="card-content">
-                    <div class="product-grid">
-                        <div class="product-item">
-                            <img src="public/image/boat.png" alt="boAt">
-                            <span class="product-item-label">boAt</span>
+                <div class="relative z-10 flex flex-col justify-center h-full px-unit-8 md:px-unit-12">
+                    <span class="bg-[rgba(0,184,169,0.15)] text-[var(--accent-teal)] border border-[var(--accent-teal)]/30 px-3 py-1 rounded-full font-label-md text-xs tracking-widest uppercase mb-unit-4 w-fit block backdrop-blur-sm font-bold">Curated Premium Selection</span>
+                    <h1 class="font-display-lg text-4xl md:text-5xl lg:text-display-lg text-[var(--text-primary)] max-w-2xl mb-unit-6 leading-tight font-black">
+                        Elevate Your Lifestyle
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-[var(--text-secondary)] max-w-lg mb-unit-8">
+                        Discover timeless minimal design combined with elite technology. Fast logistics and encrypted shopping support.
+                    </p>
+                    <div class="flex flex-wrap gap-unit-4">
+                        <button data-go-view="shop" class="btn-primary px-unit-8 py-unit-4 rounded-lg font-label-md text-label-md active:scale-95 transition-all shadow-lg">
+                            Explore store
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Homepage Catalog Section -->
+            <section id="catalog-section" class="mb-unit-16 border-t border-[var(--border-muted)] pt-unit-12">
+                <div class="flex justify-between items-end mb-unit-8">
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-[var(--text-primary)] font-black">Product Catalog</h2>
+                        <p class="font-body-md text-body-md text-[var(--text-secondary)]">Select a category to browse our premium collection</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div data-category="Apparel" class="category-card group relative overflow-hidden rounded-xl border border-[var(--border-muted)] bg-[var(--bg-card)] shadow-md hover:shadow-2xl hover:border-[rgba(0,184,169,0.25)] transition-all duration-500 cursor-pointer aspect-[4/3] w-full">
+                        <div class="absolute inset-0 w-full h-full">
+                            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="Apparel" class="w-full h-full object-cover grayscale-0 group-hover:grayscale group-hover:scale-105 group-hover:contrast-125 group-hover:brightness-75 transition-all duration-700 ease-out" />
                         </div>
-                        <div class="product-item">
-                            <img src="public/image/boult.png" alt="Headphones">
-                            <span class="product-item-label">boult</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/zebronics.png" alt="Zebronics">
-                            <span class="product-item-label">Zebronics</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/noise.png" alt="Noise">
-                            <span class="product-item-label">Noise</span>
+                        <div class="absolute inset-0 catalog-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end z-20 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-1">Apparel</h3>
+                            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Premium designer clothing & essentials.</p>
                         </div>
                     </div>
-                    <a href="#" class="explore-link">Explore all</a>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="card-header">
-                    <h3 class="card-title">Appliances for your home</h3>
-                </div>
-                <div class="card-content">
-                    <div class="product-grid">
-                        <div class="product-item">
-                            <img src="public/image/vacuum.png" alt="Vacuum">
-                            <span class="product-item-label">Vacuum cleaner</span>
+                    <div data-category="Electronics" class="category-card group relative overflow-hidden rounded-xl border border-[var(--border-muted)] bg-[var(--bg-card)] shadow-md hover:shadow-2xl hover:border-[rgba(0,184,169,0.25)] transition-all duration-500 cursor-pointer aspect-[4/3] w-full">
+                        <div class="absolute inset-0 w-full h-full">
+                            <img src="https://images.unsplash.com/photo-1468436139062-f60a71c5c892?auto=format&fit=crop&w=800&q=80" alt="Electronics" class="w-full h-full object-cover grayscale-0 group-hover:grayscale group-hover:scale-105 group-hover:contrast-125 group-hover:brightness-75 transition-all duration-700 ease-out" />
                         </div>
-                        <div class="product-item">
-                            <img src="public/image/mixer.png" alt="Mixer">
-                            <span class="product-item-label">Mixer</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/refrigerator.png" alt="Refrigerator">
-                            <span class="product-item-label">Refrigerator</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/iron.png" alt="Iron">
-                            <span class="product-item-label">Iron</span>
+                        <div class="absolute inset-0 catalog-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end z-20 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-1">Electronics</h3>
+                            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">High-fidelity acoustics & computing gear.</p>
                         </div>
                     </div>
-                    <a href="#" class="explore-link">Explore all</a>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="card-header">
-                    <h3 class="card-title">Starting at ₹399 | Fashion</h3>
-                </div>
-                <div class="card-content">
-                    <div class="product-grid">
-                        <div class="product-item">
-                            <img src="public/image/jeans.png" alt="Jeans">
-                            <span class="product-item-label">Jeans</span>
+                    <div data-category="Accessories" class="category-card group relative overflow-hidden rounded-xl border border-[var(--border-muted)] bg-[var(--bg-card)] shadow-md hover:shadow-2xl hover:border-[rgba(0,184,169,0.25)] transition-all duration-500 cursor-pointer aspect-[4/3] w-full">
+                        <div class="absolute inset-0 w-full h-full">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" alt="Accessories" class="w-full h-full object-cover grayscale-0 group-hover:grayscale group-hover:scale-105 group-hover:contrast-125 group-hover:brightness-75 transition-all duration-700 ease-out" />
                         </div>
-                        <div class="product-item">
-                            <img src="public/image/shirt.png" alt="Shirt">
-                            <span class="product-item-label">Shirt</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/suit.png" alt="Suit">
-                            <span class="product-item-label">Suit</span>
-                        </div>
-                        <div class="product-item">
-                            <img src="public/image/boots.png" alt="Boots">
-                            <span class="product-item-label">Boots</span>
+                        <div class="absolute inset-0 catalog-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end z-20 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-1">Accessories</h3>
+                            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Refined timepieces & lifestyle leather goods.</p>
                         </div>
                     </div>
-                    <a href="#" class="explore-link">Explore all</a>
+                    <div data-category="Fitness" class="category-card group relative overflow-hidden rounded-xl border border-[var(--border-muted)] bg-[var(--bg-card)] shadow-md hover:shadow-2xl hover:border-[rgba(0,184,169,0.25)] transition-all duration-500 cursor-pointer aspect-[4/3] w-full">
+                        <div class="absolute inset-0 w-full h-full">
+                            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Fitness" class="w-full h-full object-cover grayscale-0 group-hover:grayscale group-hover:scale-105 group-hover:contrast-125 group-hover:brightness-75 transition-all duration-700 ease-out" />
+                        </div>
+                        <div class="absolute inset-0 catalog-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end z-20 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-1">Fitness</h3>
+                            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Premium activewear & training equipment.</p>
+                        </div>
+                    </div>
+                    <div data-category="Home Decor" class="category-card group relative overflow-hidden rounded-xl border border-[var(--border-muted)] bg-[var(--bg-card)] shadow-md hover:shadow-2xl hover:border-[rgba(0,184,169,0.25)] transition-all duration-500 cursor-pointer aspect-[4/3] w-full">
+                        <div class="absolute inset-0 w-full h-full">
+                            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Home Decor" class="w-full h-full object-cover grayscale-0 group-hover:grayscale group-hover:scale-105 group-hover:contrast-125 group-hover:brightness-75 transition-all duration-700 ease-out" />
+                        </div>
+                        <div class="absolute inset-0 catalog-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end z-20 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-1">Home Decor</h3>
+                            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Minimalist styling pieces & space accessories.</p>
+                        </div>
+                    </div>
+                    <div data-category="Home & Kitchen" class="category-card group relative overflow-hidden rounded-xl border border-[var(--border-muted)] bg-[var(--bg-card)] shadow-md hover:shadow-2xl hover:border-[rgba(0,184,169,0.25)] transition-all duration-500 cursor-pointer aspect-[4/3] w-full">
+                        <div class="absolute inset-0 w-full h-full">
+                            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" alt="Home & Kitchen" class="w-full h-full object-cover grayscale-0 group-hover:grayscale group-hover:scale-105 group-hover:contrast-125 group-hover:brightness-75 transition-all duration-700 ease-out" />
+                        </div>
+                        <div class="absolute inset-0 catalog-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                        <div class="absolute inset-0 p-6 flex flex-col justify-end z-20 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-1">Home & Kitchen</h3>
+                            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">Sleek, high-performance cooking tools.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Value Props Strip -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-unit-8 py-unit-12 border-t border-[var(--border-muted)]">
+                <div class="flex items-start gap-unit-4">
+                    <div class="bg-[var(--bg-card)] p-unit-3 rounded-full text-[var(--accent-teal)] border border-[var(--border-muted)]">
+                        <span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+                    </div>
+                    <div>
+                        <h4 class="font-label-md text-label-md text-[var(--text-primary)] uppercase mb-base font-bold">Fast Delivery</h4>
+                        <p class="font-body-md text-body-md text-[var(--text-secondary)]">Global expedited logistics delivering in record speed.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-unit-4">
+                    <div class="bg-[var(--bg-card)] p-unit-3 rounded-full text-[var(--accent-teal)] border border-[var(--border-muted)]">
+                        <span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+                    </div>
+                    <div>
+                        <h4 class="font-label-md text-label-md text-[var(--text-primary)] uppercase mb-base font-bold">Encrypted Checkout</h4>
+                        <p class="font-body-md text-body-md text-[var(--text-secondary)]">Encrypted payment integrations with Visa & card networks.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-unit-4">
+                    <div class="bg-[var(--bg-card)] p-unit-3 rounded-full text-[var(--accent-teal)] border border-[var(--border-muted)]">
+                        <span class="material-symbols-outlined" data-icon="headset_mic">headset_mic</span>
+                    </div>
+                    <div>
+                        <h4 class="font-label-md text-label-md text-[var(--text-primary)] uppercase mb-base font-bold">Elite Support</h4>
+                        <p class="font-body-md text-body-md text-[var(--text-secondary)]">Dedicated service concierges available 24/7 online.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Us Target Section -->
+            <section id="about-section" class="py-unit-12 border-t border-[var(--border-muted)] mt-unit-8 text-center max-w-3xl mx-auto">
+                <span class="text-[var(--accent-teal)] font-label-md text-label-md tracking-widest uppercase mb-unit-2 block">Our Philosophy</span>
+                <h3 class="font-headline-lg text-headline-lg text-[var(--text-primary)] font-black mb-unit-4">About LeapCart</h3>
+                <p class="font-body-lg text-body-lg text-[var(--text-secondary)] leading-relaxed">
+                    Defining the next generation of digital retail. LeapCart blends premium minimalist aesthetics, high-end styling details, and fluid interactive animations to deliver an effortless shopping journey. From carefully curated boutique apparel to high-fidelity electronics, we focus on luxury, speed, and absolute detail.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 2: LUXECART SHOP FASHION -->
+    <!-- ============================================== -->
+    <div id="view-shop" class="view-container hidden w-full pt-24 flex gap-0 px-0 max-w-none relative">
+        <div id="sidebar-backdrop"></div>
+        <aside id="shop-sidebar" class="sticky top-20 z-45 p-unit-6 w-64 shrink-0 transition-all duration-300 no-scrollbar relative overflow-visible">
+            <div class="flex justify-between items-center mb-unit-6 w-full relative">
+                <div class="hidden-collapsed">
+                    <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold">Refine Collections</h2>
+                    <p class="font-body-md text-body-md text-[var(--text-muted)]">Filter parameters</p>
+                </div>
+                <button id="sidebar-toggle-btn" class="bg-[var(--bg-card)] hover:bg-[var(--bg-card-hover)] text-[var(--text-primary)] border border-[var(--border-soft)] rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:scale-105 transition-all z-50">
+                    <span class="material-symbols-outlined text-[18px] font-bold" id="sidebar-toggle-icon">chevron_left</span>
+                </button>
+            </div>
+            <div class="hidden-collapsed flex flex-col gap-unit-6 mt-unit-4 overflow-y-auto no-scrollbar h-[calc(100vh-80px)] pb-20">
+                <div class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Category</h3>
+                    <div class="flex flex-col gap-unit-1 text-body-md pl-unit-2">
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input type="checkbox" name="shop-cat" value="All" checked class="category-btn-checkbox text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]"/>
+                            <span class="text-sm font-medium">All Products</span>
+                        </label>
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input type="checkbox" name="shop-cat" value="Apparel" class="category-btn-checkbox text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]"/>
+                            <span class="text-sm font-medium">Apparel</span>
+                        </label>
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input type="checkbox" name="shop-cat" value="Electronics" class="category-btn-checkbox text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]"/>
+                            <span class="text-sm font-medium">Electronics</span>
+                        </label>
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input type="checkbox" name="shop-cat" value="Accessories" class="category-btn-checkbox text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]"/>
+                            <span class="text-sm font-medium">Accessories</span>
+                        </label>
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input type="checkbox" name="shop-cat" value="Fitness" class="category-btn-checkbox text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]"/>
+                            <span class="text-sm font-medium">Fitness</span>
+                        </label>
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input type="checkbox" name="shop-cat" value="Home Decor" class="category-btn-checkbox text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]"/>
+                            <span class="text-sm font-medium">Home Decor</span>
+                        </label>
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input type="checkbox" name="shop-cat" value="Home & Kitchen" class="category-btn-checkbox text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]"/>
+                            <span class="text-sm font-medium">Home & Kitchen</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="subcategory-sidebar-section" class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Subcategory</h3>
+                    <div id="sidebar-subcategory-container" class="flex flex-col gap-unit-1 text-body-md pl-unit-2">
+                    </div>
+                </div>
+                <hr class="border-[var(--border-muted)] my-unit-1" />
+                <div class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Price Filter</h3>
+                    <div class="flex flex-col gap-unit-3">
+                        <div class="flex justify-between items-center text-xs font-bold font-label-md">
+                            <span id="price-min-label" class="text-[var(--text-secondary)]">₹0</span>
+                            <span class="text-[var(--text-muted)]">—</span>
+                            <span id="price-max-label" class="text-[var(--text-secondary)]">₹69,999+</span>
+                        </div>
+                        <div class="relative w-full h-6 flex items-center">
+                            <div class="relative w-[calc(100%-16px)] mx-auto h-full flex items-center">
+                                <div class="absolute inset-x-0 h-1 bg-[var(--bg-card)] rounded z-0"></div>
+                                <div id="price-slider-track" class="absolute h-1 bg-[var(--accent-teal)] rounded z-10" style="left: 0%; right: 0%;"></div>
+                                <input type="range" id="price-min-slider" min="0" max="70000" value="0" step="500" class="absolute w-full appearance-none bg-transparent pointer-events-none focus:outline-none z-20 slider-thumb-style" />
+                                <input type="range" id="price-max-slider" min="0" max="70000" value="70000" step="500" class="absolute w-full appearance-none bg-transparent pointer-events-none focus:outline-none z-20 slider-thumb-style" />
+                            </div>
+                        </div>
+                        <div class="flex gap-unit-2 items-center mt-base">
+                            <div class="flex flex-col gap-1 flex-1">
+                                <span class="text-[10px] uppercase font-bold text-[var(--text-muted)]">Min (₹)</span>
+                                <input type="number" id="price-min-input" min="0" max="70000" value="0" class="input-dark w-full rounded-lg py-1.5 px-2 text-xs font-semibold" />
+                            </div>
+                            <div class="flex flex-col gap-1 flex-1">
+                                <span class="text-[10px] uppercase font-bold text-[var(--text-muted)]">Max (₹)</span>
+                                <input type="number" id="price-max-input" min="0" max="70000" value="70000" class="input-dark w-full rounded-lg py-1.5 px-2 text-xs font-semibold" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-[var(--border-muted)] my-unit-1" />
+                <div class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Minimum Rating</h3>
+                    <div class="space-y-unit-2">
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.5" />
+                            <span class="text-sm font-medium">4.5 Stars & Up</span>
+                        </label>
+                        <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.8" />
+                            <span class="text-sm font-medium">4.8 Stars & Up</span>
+                        </label>
+                    </div>
+                </div>
+                <hr class="border-[var(--border-muted)] my-unit-1" />
+                <div class="mt-unit-2 flex flex-col gap-unit-2">
+                    <button class="apply-filters btn-primary w-full py-unit-2 rounded-lg font-label-md text-xs active:scale-95 transition-all tracking-wider uppercase">Apply Filters</button>
+                    <button class="reset-filters btn-ghost w-full py-unit-2 rounded-lg font-label-md text-xs active:scale-95 transition-all tracking-wider uppercase">Reset</button>
+                </div>
+            </div>
+            <div class="show-collapsed hidden flex-col items-center gap-unit-6 mt-unit-8 text-[var(--text-muted)]">
+                <span class="material-symbols-outlined cursor-pointer hover:text-[var(--accent-teal)]" title="Categories">category</span>
+                <span class="material-symbols-outlined cursor-pointer hover:text-[var(--accent-teal)]" title="Price Range">payments</span>
+                <span class="material-symbols-outlined cursor-pointer hover:text-[var(--accent-teal)]" title="Minimum Rating">star</span>
+            </div>
+        </aside>
+        <main class="flex-grow min-h-screen pt-0">
+            <div class="sticky top-20 bg-[var(--bg-section)]/90 backdrop-blur-md z-30 px-unit-6 py-unit-3 border-b border-[var(--border-muted)]" id="sticky-filter-tab">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="flex items-center gap-2 text-body-md text-[var(--text-secondary)]">
+                        <button data-go-view="home" class="flex items-center gap-1 text-[var(--text-muted)] hover:text-[var(--accent-teal)] transition-colors mr-unit-2 font-label-md text-xs uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                            Home
+                        </button>
+                        <button id="mobile-filter-btn" class="md:hidden flex items-center gap-1 text-[var(--accent-teal)] hover:text-[var(--accent-teal)] transition-colors mr-unit-2 font-label-md text-xs uppercase tracking-wider px-unit-3 py-unit-1.5 rounded-full border border-[var(--accent-teal)]/30 bg-[var(--accent-teal)]/5">
+                            <span class="material-symbols-outlined text-[16px]">filter_list</span>
+                            Filters
+                        </button>
+                        <span class="font-label-md text-xs uppercase tracking-wider text-[var(--text-muted)]">Category:</span>
+                        <span id="active-category-label" class="text-base text-[var(--text-primary)] font-black uppercase tracking-wide">All Products</span>
+                    </div>
+                    <div id="subcategory-buttons-container" class="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth"></div>
+                </div>
+            </div>
+            <section class="p-unit-6 md:p-unit-12 max-w-7xl mx-auto">
+                <div class="flex justify-end items-center mb-unit-8">
+                    <div class="flex items-center gap-unit-2 bg-[var(--bg-card)] px-unit-3 py-unit-1 rounded-lg border border-[var(--border-muted)]">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)]">Sort by:</span>
+                        <select class="sort-select bg-transparent border-none text-label-md font-bold focus:ring-0 p-0 pr-unit-6 text-[var(--text-primary)]">
+                            <option value="newest" class="bg-[var(--bg-card)]">Newest Collection</option>
+                            <option value="low-to-high" class="bg-[var(--bg-card)]">Price: Low to High</option>
+                            <option value="high-to-low" class="bg-[var(--bg-card)]">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-unit-6" id="product-grid-shop"></div>
+                <div class="hidden flex-col items-center justify-center py-unit-16 text-center" id="empty-state-shop">
+                    <div class="w-24 h-24 bg-[var(--bg-card)] rounded-full flex items-center justify-center mb-unit-6">
+                        <span class="material-symbols-outlined text-[var(--text-muted)] text-[48px]">search_off</span>
+                    </div>
+                    <h3 class="font-headline-lg text-headline-lg text-[var(--text-primary)]">No items found</h3>
+                    <p class="text-[var(--text-secondary)] max-w-sm mt-unit-2">We couldn't find any products in this pricing bounds or filter selection.</p>
+                    <button class="reset-filters mt-unit-6 text-[var(--accent-teal)] font-bold hover:underline">Clear all filters</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 3: LUXECART INTERACTIVE SHOP -->
+    <!-- ============================================== -->
+    <div id="view-interactive-shop" class="view-container hidden">
+        <aside class="fixed left-0 top-20 h-[calc(100vh-80px)] overflow-y-auto z-40 p-unit-6 bg-[var(--bg-section)] docked left-0 h-full w-16 md:w-64 border-r border-[var(--border-muted)] transition-all duration-200">
+            <div class="mb-unit-6 hidden md:block">
+                <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold">Interactive Filters</h2>
+                <p class="font-body-md text-body-md text-[var(--text-secondary)]">Click checkmarks below</p>
+            </div>
+            <div class="flex flex-col gap-unit-6">
+                <div class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Price Bounds</h3>
+                    <div class="space-y-unit-2">
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-price text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="0-5000" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">Under ₹50</span>
+                        </label>
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-price text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="5000-15000" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">₹50 - ₹150</span>
+                        </label>
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-price text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="15000-plus" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">Over ₹150</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Customer Rating</h3>
+                    <div class="space-y-unit-2">
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.5" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">4.5 Stars & Up</span>
+                        </label>
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.8" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">4.8 Stars & Up</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-unit-8 flex flex-col gap-unit-2">
+                <button class="apply-filters btn-primary w-full py-2.5 rounded-lg font-label-md text-xs active:scale-[0.98] transition-all">Apply Filters</button>
+                <button class="reset-filters btn-ghost w-full py-2.5 rounded-lg font-label-md text-xs active:scale-[0.98] transition-all">Reset</button>
+            </div>
+        </aside>
+        <main class="ml-16 md:ml-64 transition-all duration-300 min-h-screen pt-20">
+            <div class="sticky top-20 bg-[var(--bg-section)]/80 backdrop-blur-md z-30 px-unit-6 py-unit-4 border-b border-[var(--border-muted)]">
+                <div class="max-w-5xl mx-auto flex items-center justify-center gap-unit-8">
+                    <button class="category-btn relative px-unit-4 py-unit-2 group active" data-category="All">
+                        <span class="font-label-md text-label-md text-[var(--text-primary)] font-bold">All Products</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-100"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Apparel">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Apparel</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Electronics">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Electronics</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Accessories">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Accessories</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Fitness">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Fitness</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Home Decor">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Home Decor</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Home & Kitchen">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Home & Kitchen</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                </div>
+            </div>
+            <section class="p-unit-6 md:p-unit-12 max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-unit-8">
+                    <div>
+                        <h1 class="font-headline-lg text-headline-lg text-[var(--text-primary)] font-black">Interactive Studio</h1>
+                        <p class="text-[var(--text-secondary)] font-body-md">Click Add to Cart on any product to add it to your cart</p>
+                    </div>
+                    <div class="flex items-center gap-unit-2 bg-[var(--bg-card)] px-unit-3 py-unit-1 rounded-lg border border-[var(--border-muted)]">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)]">Sort by:</span>
+                        <select class="sort-select bg-transparent border-none text-label-md font-bold focus:ring-0 p-0 pr-unit-6 text-[var(--text-primary)]">
+                            <option value="newest" class="bg-[var(--bg-card)]">Newest First</option>
+                            <option value="low-to-high" class="bg-[var(--bg-card)]">Price: Low to High</option>
+                            <option value="high-to-low" class="bg-[var(--bg-card)]">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-unit-6" id="product-grid-interactive"></div>
+                <div class="hidden flex-col items-center justify-center py-unit-16 text-center" id="empty-state-interactive">
+                    <div class="w-24 h-24 bg-[var(--bg-card)] rounded-full flex items-center justify-center mb-unit-6">
+                        <span class="material-symbols-outlined text-[var(--text-muted)] text-[48px]">search_off</span>
+                    </div>
+                    <h3 class="font-headline-lg text-headline-lg text-[var(--text-primary)]">No items found</h3>
+                    <p class="text-[var(--text-secondary)] max-w-sm mt-unit-2">We couldn't find any products in this pricing bounds or filter selection.</p>
+                    <button class="reset-filters mt-unit-6 text-[var(--accent-teal)] font-bold hover:underline">Clear all filters</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MOBILE FILTER BOTTOM SHEET (Shop only) -->
+    <!-- ============================================== -->
+    <div id="mobile-filter-sheet" class="md:hidden fixed inset-x-0 bottom-0 z-50 hidden flex-col rounded-t-2xl bg-[var(--bg-section)] border-t border-[var(--border-muted)] shadow-2xl max-h-[85vh] transform transition-transform duration-300 translate-y-full">
+        <div class="flex items-center justify-between px-unit-6 pt-unit-4 pb-unit-2 border-b border-[var(--border-muted)] flex-shrink-0">
+            <div class="flex items-center gap-unit-3">
+                <div class="w-8 h-1 bg-[var(--text-muted)]/40 rounded-full mx-auto md:hidden"></div>
+                <h3 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold">Filters</h3>
+            </div>
+            <button id="mobile-filter-close" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--bg-card)] transition-colors">
+                <span class="material-symbols-outlined text-[var(--text-secondary)]">close</span>
+            </button>
+        </div>
+        <div class="overflow-y-auto p-unit-6 space-y-unit-6 flex-1">
+            <div class="flex flex-col gap-unit-2">
+                <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Category</h3>
+                <div class="grid grid-cols-2 gap-unit-2">
+                    <button class="mobile-filter-cat category-btn text-left px-unit-3 py-unit-2 rounded-lg border border-[var(--border-muted)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/30 transition-all font-label-md text-label-md" data-category="All">All</button>
+                    <button class="mobile-filter-cat category-btn text-left px-unit-3 py-unit-2 rounded-lg border border-[var(--border-muted)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/30 transition-all font-label-md text-label-md" data-category="Apparel">Apparel</button>
+                    <button class="mobile-filter-cat category-btn text-left px-unit-3 py-unit-2 rounded-lg border border-[var(--border-muted)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/30 transition-all font-label-md text-label-md" data-category="Electronics">Electronics</button>
+                    <button class="mobile-filter-cat category-btn text-left px-unit-3 py-unit-2 rounded-lg border border-[var(--border-muted)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/30 transition-all font-label-md text-label-md" data-category="Accessories">Accessories</button>
+                    <button class="mobile-filter-cat category-btn text-left px-unit-3 py-unit-2 rounded-lg border border-[var(--border-muted)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/30 transition-all font-label-md text-label-md" data-category="Fitness">Fitness</button>
+                    <button class="mobile-filter-cat category-btn text-left px-unit-3 py-unit-2 rounded-lg border border-[var(--border-muted)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/30 transition-all font-label-md text-label-md" data-category="Home Decor">Home Decor</button>
+                    <button class="mobile-filter-cat category-btn text-left px-unit-3 py-unit-2 rounded-lg border border-[var(--border-muted)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/30 transition-all font-label-md text-label-md col-span-2" data-category="Home & Kitchen">Home & Kitchen</button>
+                </div>
+            </div>
+            <hr class="border-[var(--border-muted)]" />
+            <div class="flex flex-col gap-unit-2">
+                <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Price Range</h3>
+                <div class="flex justify-between items-center text-xs font-bold font-label-md">
+                    <span id="mob-price-min-label" class="text-[var(--text-secondary)]">₹0</span>
+                    <span class="text-[var(--text-muted)]">—</span>
+                    <span id="mob-price-max-label" class="text-[var(--text-secondary)]">₹69,999+</span>
+                </div>
+                <div class="relative w-full h-6 flex items-center">
+                    <div class="relative w-[calc(100%-16px)] mx-auto h-full flex items-center">
+                        <div class="absolute inset-x-0 h-1 bg-[var(--bg-card)] rounded z-0"></div>
+                        <div id="mob-price-slider-track" class="absolute h-1 bg-[var(--accent-teal)] rounded z-10" style="left: 0%; right: 0%;"></div>
+                        <input type="range" id="mob-price-min-slider" min="0" max="70000" value="0" step="500" class="absolute w-full appearance-none bg-transparent pointer-events-none focus:outline-none z-20 slider-thumb-style" />
+                        <input type="range" id="mob-price-max-slider" min="0" max="70000" value="70000" step="500" class="absolute w-full appearance-none bg-transparent pointer-events-none focus:outline-none z-20 slider-thumb-style" />
+                    </div>
+                </div>
+                <div class="flex gap-unit-2 items-center mt-base">
+                    <div class="flex flex-col gap-1 flex-1">
+                        <span class="text-[10px] uppercase font-bold text-[var(--text-muted)]">Min (₹)</span>
+                        <input type="number" id="mob-price-min-input" min="0" max="70000" value="0" class="input-dark w-full rounded-lg py-1.5 px-2 text-xs font-semibold" />
+                    </div>
+                    <div class="flex flex-col gap-1 flex-1">
+                        <span class="text-[10px] uppercase font-bold text-[var(--text-muted)]">Max (₹)</span>
+                        <input type="number" id="mob-price-max-input" min="0" max="70000" value="70000" class="input-dark w-full rounded-lg py-1.5 px-2 text-xs font-semibold" />
+                    </div>
+                </div>
+            </div>
+            <hr class="border-[var(--border-muted)]" />
+            <div class="flex flex-col gap-unit-2">
+                <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Minimum Rating</h3>
+                <div class="space-y-unit-2">
+                    <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                        <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.5" />
+                        <span class="text-sm font-medium">4.5 Stars & Up</span>
+                    </label>
+                    <label class="flex items-center gap-unit-3 cursor-pointer py-1.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                        <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.8" />
+                        <span class="text-sm font-medium">4.8 Stars & Up</span>
+                    </label>
                 </div>
             </div>
         </div>
-    </main>
+        <div class="flex gap-unit-3 px-unit-6 py-unit-4 border-t border-[var(--border-muted)] flex-shrink-0">
+            <button class="reset-filters btn-ghost flex-1 py-unit-3 rounded-lg font-label-md text-label-md">Reset</button>
+            <button class="apply-filters btn-primary flex-1 py-unit-3 rounded-lg font-label-md text-label-md" id="mobile-filters-apply">Apply Filters</button>
+        </div>
+    </div>
+    <div id="mobile-filter-backdrop" class="md:hidden fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 4: LUXECART ANIMATED SHOP -->
+    <!-- ============================================== -->
+    <div id="view-animated-shop" class="view-container hidden">
+        <aside class="fixed left-0 top-20 h-[calc(100vh-80px)] overflow-y-auto z-40 p-unit-6 bg-[var(--bg-section)] docked left-0 h-full w-16 md:w-64 border-r border-[var(--border-muted)] transition-all duration-200">
+            <div class="mb-unit-6 hidden md:block">
+                <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold">Filter Studio</h2>
+                <p class="font-body-md text-body-md text-[var(--text-secondary)]">Visual animations enabled</p>
+            </div>
+            <div class="flex flex-col gap-unit-6">
+                <div class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Cost Options</h3>
+                    <div class="space-y-unit-2">
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-price text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="0-5000" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">Under ₹50</span>
+                        </label>
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-price text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="5000-15000" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">₹50 - ₹150</span>
+                        </label>
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-price text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="15000-plus" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">Over ₹150</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-unit-2">
+                    <h3 class="font-label-md text-label-md text-[var(--text-muted)] uppercase font-bold">Review Score</h3>
+                    <div class="space-y-unit-2">
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.5" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">4.5 Stars & Up</span>
+                        </label>
+                        <label class="flex items-center gap-unit-2 cursor-pointer">
+                            <input class="filter-rating text-[var(--accent-teal)] focus:ring-[var(--accent-teal)] rounded-sm bg-[var(--bg-card)] border-[var(--border-soft)]" type="checkbox" value="4.8" />
+                            <span class="hidden md:inline font-body-md text-[var(--text-secondary)]">4.8 Stars & Up</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-unit-8 flex flex-col gap-unit-2">
+                <button class="apply-filters btn-primary w-full py-2.5 rounded-lg font-label-md text-xs active:scale-[0.98] transition-all">Apply Filters</button>
+                <button class="reset-filters btn-ghost w-full py-2.5 rounded-lg font-label-md text-xs active:scale-[0.98] transition-all">Reset</button>
+            </div>
+        </aside>
+        <main class="ml-16 md:ml-64 transition-all duration-300 min-h-screen pt-20">
+            <div class="sticky top-20 bg-[var(--bg-section)]/80 backdrop-blur-md z-30 px-unit-6 py-unit-4 border-b border-[var(--border-muted)]">
+                <div class="max-w-5xl mx-auto flex items-center justify-center gap-unit-8">
+                    <button class="category-btn relative px-unit-4 py-unit-2 group active" data-category="All">
+                        <span class="font-label-md text-label-md text-[var(--text-primary)] font-bold">All Products</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-100"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Apparel">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Apparel</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Electronics">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Electronics</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Accessories">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Accessories</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Fitness">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Fitness</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Home Decor">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Home Decor</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                    <button class="category-btn relative px-unit-4 py-unit-2 group" data-category="Home & Kitchen">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">Home & Kitchen</span>
+                        <div class="category-indicator absolute bottom-0 left-0 w-full h-0.5 bg-[var(--accent-teal)] scale-x-0"></div>
+                    </button>
+                </div>
+            </div>
+            <section class="p-unit-6 md:p-unit-12 max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-unit-8">
+                    <div>
+                        <h1 class="font-headline-lg text-headline-lg text-[var(--text-primary)] font-black">Animated Catalog</h1>
+                        <p class="text-[var(--text-secondary)] font-body-md">Cards entry transitions enabled for immersive review</p>
+                    </div>
+                    <div class="flex items-center gap-unit-2 bg-[var(--bg-card)] px-unit-3 py-unit-1 rounded-lg border border-[var(--border-muted)]">
+                        <span class="font-label-md text-label-md text-[var(--text-secondary)]">Sort:</span>
+                        <select class="sort-select bg-transparent border-none text-label-md font-bold focus:ring-0 p-0 pr-unit-6 text-[var(--text-primary)]">
+                            <option value="newest" class="bg-[var(--bg-card)]">Newest First</option>
+                            <option value="low-to-high" class="bg-[var(--bg-card)]">Price: Low to High</option>
+                            <option value="high-to-low" class="bg-[var(--bg-card)]">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-unit-6" id="product-grid-animated"></div>
+                <div class="hidden flex-col items-center justify-center py-unit-16 text-center" id="empty-state-animated">
+                    <div class="w-24 h-24 bg-[var(--bg-card)] rounded-full flex items-center justify-center mb-unit-6">
+                        <span class="material-symbols-outlined text-[var(--text-muted)] text-[48px]">search_off</span>
+                    </div>
+                    <h3 class="font-headline-lg text-headline-lg text-[var(--text-primary)]">No items found</h3>
+                    <p class="text-[var(--text-secondary)] max-w-sm mt-unit-2">We couldn't find any products in this pricing bounds or filter selection.</p>
+                    <button class="reset-filters mt-unit-6 text-[var(--accent-teal)] font-bold hover:underline">Clear all filters</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 5: CHECKOUT - SHIPPING DETAILS -->
+    <!-- ============================================== -->
+    <div id="view-checkout-shipping" class="view-container hidden">
+        <main class="max-w-3xl mx-auto px-unit-4 md:px-unit-12 pt-24 pb-unit-12">
+            <div class="flex items-center justify-center mb-unit-12">
+                <div class="flex items-center w-full max-w-xl relative">
+                    <div class="flex flex-col items-center flex-1 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center mb-unit-2 shadow-md">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-primary)] font-bold">Shipping</span>
+                    </div>
+                    <div class="h-1 bg-[var(--bg-card)] flex-1 -mx-5 mb-6"></div>
+                    <div class="flex flex-col items-center flex-1 relative z-10 opacity-40">
+                        <div class="w-10 h-10 rounded-full bg-[var(--bg-card)] text-[var(--text-muted)] flex items-center justify-center mb-unit-2">
+                            <span class="material-symbols-outlined text-lg">payments</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-muted)]">Payment</span>
+                    </div>
+                    <div class="h-1 bg-[var(--bg-card)] flex-1 -mx-5 mb-6"></div>
+                    <div class="flex flex-col items-center flex-1 relative z-10 opacity-40">
+                        <div class="w-10 h-10 rounded-full bg-[var(--bg-card)] text-[var(--text-muted)] flex items-center justify-center mb-unit-2">
+                            <span class="material-symbols-outlined text-lg">description</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-muted)]">Review</span>
+                    </div>
+                </div>
+            </div>
+            <section class="card-dark p-unit-8 rounded-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-[var(--accent-teal)]"></div>
+                <div class="mb-unit-8">
+                    <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold flex items-center gap-unit-2">
+                        <span class="material-symbols-outlined text-[var(--accent-teal)]">local_shipping</span>
+                        Shipping Information
+                    </h2>
+                    <p class="font-body-md text-body-md text-[var(--text-secondary)]">Please specify the recipient address details below.</p>
+                </div>
+                <form id="shipping-form" class="space-y-unit-6" novalidate>
+
+                    <!-- Full Name -->
+                    <div class="flex flex-col gap-unit-2">
+                        <label for="s-fullName" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Full Name</label>
+                        <input id="s-fullName" name="fullName" type="text" autocomplete="name"
+                               class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                               placeholder="Neha Sharma" />
+                        <span id="shipping-fullName-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex flex-col gap-unit-2">
+                        <label for="s-email" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Email Address</label>
+                        <input id="s-email" name="email" type="email" autocomplete="email"
+                               class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                               placeholder="neha@example.com" />
+                        <span id="shipping-email-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="flex flex-col gap-unit-2">
+                        <label for="s-phone" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Phone Number</label>
+                        <input id="s-phone" name="phone" type="tel" autocomplete="tel" maxlength="10"
+                               class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                               placeholder="9876543210" />
+                        <span id="shipping-phone-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                    </div>
+
+                    <!-- Street Address -->
+                    <div class="flex flex-col gap-unit-2">
+                        <label for="s-street" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Street Address</label>
+                        <input id="s-street" name="street" type="text" autocomplete="street-address"
+                               class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                               placeholder="123 MG Road, Apt 4B" />
+                        <span id="shipping-street-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                    </div>
+
+                    <!-- City + Pincode -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-unit-6">
+                        <div class="flex flex-col gap-unit-2">
+                            <label for="s-city" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">City</label>
+                            <input id="s-city" name="city" type="text" autocomplete="address-level2"
+                                   class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                                   placeholder="Pune" />
+                            <span id="shipping-city-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                        </div>
+                        <div class="flex flex-col gap-unit-2">
+                            <label for="s-pincode" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Pincode</label>
+                            <input id="s-pincode" name="pincode" type="text" autocomplete="postal-code" maxlength="6" inputmode="numeric"
+                                   class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                                   placeholder="411001" />
+                            <span id="shipping-pincode-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="pt-unit-4 border-t border-[var(--border-muted)] mt-unit-8 flex gap-unit-4 justify-between">
+                        <button type="button" data-go-view="shop" class="btn-ghost px-unit-6 py-unit-3 rounded-lg font-label-md text-label-md">
+                            Back to Store
+                        </button>
+                        <button type="submit" class="btn-primary px-unit-8 py-unit-3 rounded-lg font-label-md text-label-md flex items-center gap-unit-2">
+                            Continue to Payment <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 6: CHECKOUT - PAYMENT METHOD -->
+    <!-- ============================================== -->
+    <div id="view-checkout-payment" class="view-container hidden">
+        <main class="max-w-3xl mx-auto px-unit-4 md:px-unit-12 pt-24 pb-unit-12">
+            <div class="flex items-center justify-center mb-unit-12">
+                <div class="flex items-center w-full max-w-xl relative">
+                    <div class="flex flex-col items-center flex-1 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center mb-unit-2 shadow-md">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'wght' 700;">check</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-primary)]">Shipping</span>
+                    </div>
+                    <div class="h-1 bg-[var(--accent-teal)] flex-1 -mx-5 mb-6"></div>
+                    <div class="flex flex-col items-center flex-1 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center mb-unit-2 shadow-md">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">payments</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-primary)] font-bold">Payment</span>
+                    </div>
+                    <div class="h-1 bg-[var(--bg-card)] flex-1 -mx-5 mb-6"></div>
+                    <div class="flex flex-col items-center flex-1 relative z-10 opacity-40">
+                        <div class="w-10 h-10 rounded-full bg-[var(--bg-card)] text-[var(--text-muted)] flex items-center justify-center mb-unit-2">
+                            <span class="material-symbols-outlined text-lg">description</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-muted)]">Review</span>
+                    </div>
+                </div>
+            </div>
+            <section class="card-dark p-unit-8 rounded-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-[var(--accent-teal)]"></div>
+                <div class="mb-unit-8">
+                    <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold flex items-center gap-unit-2">
+                        <span class="material-symbols-outlined text-[var(--accent-teal)]">payments</span>
+                        Secure Payment Info
+                    </h2>
+                    <p class="font-body-md text-body-md text-[var(--text-secondary)]">All connections are encrypted securely with standard Visa/Mastercard protocols.</p>
+                </div>
+                <form id="payment-form" class="space-y-unit-6" novalidate>
+
+                    <!-- Payment method selector -->
+                    <div class="flex flex-col gap-unit-3">
+                        <label class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Select Payment Method</label>
+                        <div class="grid grid-cols-1 gap-unit-3">
+
+                            <!-- COD -->
+                            <label id="pm-cod-label" class="payment-method-option flex items-center gap-unit-4 p-unit-4 rounded-xl border-2 border-[var(--border-soft)] bg-[var(--bg-card)] cursor-pointer transition-all duration-200 hover:border-[var(--accent-teal)]/60 hover:bg-[var(--bg-elevated)]">
+                                <input type="radio" name="paymentMethod" value="cod" class="sr-only" />
+                                <div class="w-10 h-10 rounded-full bg-[var(--bg-elevated)] flex items-center justify-center flex-shrink-0 border border-[var(--border-soft)]">
+                                    <span class="material-symbols-outlined text-[var(--accent-amber)] text-[20px]" style="font-variation-settings:'FILL' 1;">local_shipping</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-bold text-[var(--text-primary)] text-body-md">Cash on Delivery</p>
+                                    <p class="font-body-md text-label-md text-[var(--text-muted)]">Pay when your order arrives</p>
+                                </div>
+                                <div class="pm-radio-indicator w-5 h-5 rounded-full border-2 border-[var(--border-soft)] flex items-center justify-center flex-shrink-0">
+                                    <div class="pm-radio-dot w-2.5 h-2.5 rounded-full bg-[var(--accent-teal)] hidden"></div>
+                                </div>
+                            </label>
+
+                            <!-- UPI -->
+                            <label id="pm-upi-label" class="payment-method-option flex items-center gap-unit-4 p-unit-4 rounded-xl border-2 border-[var(--border-soft)] bg-[var(--bg-card)] cursor-pointer transition-all duration-200 hover:border-[var(--accent-teal)]/60 hover:bg-[var(--bg-elevated)]">
+                                <input type="radio" name="paymentMethod" value="upi" class="sr-only" />
+                                <div class="w-10 h-10 rounded-full bg-[var(--bg-elevated)] flex items-center justify-center flex-shrink-0 border border-[var(--border-soft)]">
+                                    <span class="material-symbols-outlined text-[var(--accent-teal)] text-[20px]" style="font-variation-settings:'FILL' 1;">account_balance</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-bold text-[var(--text-primary)] text-body-md">UPI</p>
+                                    <p class="font-body-md text-label-md text-[var(--text-muted)]">GPay, PhonePe, Paytm &amp; more</p>
+                                </div>
+                                <div class="pm-radio-indicator w-5 h-5 rounded-full border-2 border-[var(--border-soft)] flex items-center justify-center flex-shrink-0">
+                                    <div class="pm-radio-dot w-2.5 h-2.5 rounded-full bg-[var(--accent-teal)] hidden"></div>
+                                </div>
+                            </label>
+
+                            <!-- Card -->
+                            <label id="pm-card-label" class="payment-method-option flex items-center gap-unit-4 p-unit-4 rounded-xl border-2 border-[var(--border-soft)] bg-[var(--bg-card)] cursor-pointer transition-all duration-200 hover:border-[var(--accent-teal)]/60 hover:bg-[var(--bg-elevated)]">
+                                <input type="radio" name="paymentMethod" value="card" class="sr-only" />
+                                <div class="w-10 h-10 rounded-full bg-[var(--bg-elevated)] flex items-center justify-center flex-shrink-0 border border-[var(--border-soft)]">
+                                    <span class="material-symbols-outlined text-[var(--accent-sky)] text-[20px]" style="font-variation-settings:'FILL' 1;">credit_card</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-bold text-[var(--text-primary)] text-body-md">Credit / Debit Card</p>
+                                    <p class="font-body-md text-label-md text-[var(--text-muted)]">Visa, Mastercard, Amex</p>
+                                </div>
+                                <div class="pm-radio-indicator w-5 h-5 rounded-full border-2 border-[var(--border-soft)] flex items-center justify-center flex-shrink-0">
+                                    <div class="pm-radio-dot w-2.5 h-2.5 rounded-full bg-[var(--accent-teal)] hidden"></div>
+                                </div>
+                            </label>
+
+                        </div>
+                        <span id="payment-method-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                    </div>
+
+                    <!-- UPI panel -->
+                    <div id="pm-upi-panel" class="hidden space-y-unit-4 p-unit-6 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border-muted)]">
+                        <div class="flex flex-col gap-unit-2">
+                            <label for="pm-upi-id" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">UPI ID</label>
+                            <input id="pm-upi-id" name="upiId" type="text" autocomplete="off" inputmode="email"
+                                   class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                                   placeholder="yourname@upi" />
+                            <span id="pm-upi-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                        </div>
+                    </div>
+
+                    <!-- Card panel -->
+                    <div id="pm-card-panel" class="hidden space-y-unit-4 p-unit-6 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border-muted)]">
+                        <div class="flex flex-col gap-unit-2">
+                            <label for="pm-card-name" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Cardholder Name</label>
+                            <input id="pm-card-name" name="cardName" type="text" autocomplete="cc-name"
+                                   class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                                   placeholder="Name as on card" />
+                            <span id="pm-cardName-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                        </div>
+                        <div class="flex flex-col gap-unit-2">
+                            <label for="pm-card-number" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Card Number</label>
+                            <input id="pm-card-number" name="cardNumber" type="text" autocomplete="cc-number"
+                                   inputmode="numeric" maxlength="19"
+                                   class="input-dark w-full px-unit-4 py-unit-3 rounded-lg font-mono tracking-widest"
+                                   placeholder="1234 5678 9012 3456" />
+                            <span id="pm-cardNum-error" class="font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-unit-4">
+                            <div class="flex flex-col gap-unit-2">
+                                <label for="pm-expiry" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">Expiry</label>
+                                <input id="pm-expiry" name="expiry" type="text" autocomplete="cc-exp"
+                                       inputmode="numeric" maxlength="5"
+                                       class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                                       placeholder="MM/YY" />
+                                <span id="pm-expiry-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                            </div>
+                            <div class="flex flex-col gap-unit-2">
+                                <label for="pm-cvv" class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider font-bold">CVV</label>
+                                <input id="pm-cvv" name="cvv" type="password" autocomplete="cc-csc"
+                                       inputmode="numeric" maxlength="4"
+                                       class="input-dark w-full px-unit-4 py-unit-3 rounded-lg"
+                                       placeholder="•••" />
+                                <span id="pm-cvv-error" class="text-[var(--error)] font-label-md text-[12px] min-h-[16px] block" role="alert"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COD info banner -->
+                    <div id="pm-cod-panel" class="hidden p-unit-4 rounded-xl bg-[var(--accent-amber)]/10 border border-[var(--accent-amber)]/30 flex items-start gap-unit-3">
+                        <span class="material-symbols-outlined text-[var(--accent-amber)] flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;">info</span>
+                        <p class="font-body-md text-body-md text-[var(--text-secondary)]">
+                            You'll pay in cash when your order is delivered. No online transaction needed.
+                        </p>
+                    </div>
+
+                    <div class="pt-unit-4 border-t border-[var(--border-muted)] mt-unit-8 flex gap-unit-4 justify-between">
+                        <button type="button" data-go-view="checkout-shipping" class="btn-ghost px-unit-6 py-unit-3 rounded-lg font-label-md text-label-md">
+                            Back to Shipping
+                        </button>
+                        <button type="submit" class="btn-primary px-unit-8 py-unit-3 rounded-lg font-label-md text-label-md flex items-center gap-unit-2">
+                            Continue to Review <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 7: CHECKOUT - ORDER REVIEW -->
+    <!-- ============================================== -->
+    <div id="view-checkout-review" class="view-container hidden">
+        <main class="max-w-7xl mx-auto px-unit-4 md:px-unit-12 pt-24 pb-unit-12">
+            <div class="flex items-center justify-center mb-unit-12">
+                <div class="flex items-center w-full max-w-xl relative">
+                    <div class="flex flex-col items-center flex-1 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center mb-unit-2 shadow-md">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'wght' 700;">check</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-primary)]">Shipping</span>
+                    </div>
+                    <div class="h-1 bg-[var(--accent-teal)] flex-1 -mx-5 mb-6"></div>
+                    <div class="flex flex-col items-center flex-1 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center mb-unit-2 shadow-md">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'wght' 700;">check</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-primary)]">Payment</span>
+                    </div>
+                    <div class="h-1 bg-[var(--accent-teal)] flex-1 -mx-5 mb-6"></div>
+                    <div class="flex flex-col items-center flex-1 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center mb-unit-2 shadow-md">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">description</span>
+                        </div>
+                        <span class="font-label-md text-label-md text-[var(--text-primary)] font-bold">Review</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-unit-8">
+                <div class="lg:col-span-8 space-y-unit-8">
+                    <section class="card-dark p-unit-8 rounded-xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-[var(--accent-teal)]"></div>
+                        <div class="flex justify-between items-start mb-unit-6">
+                            <div>
+                                <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold flex items-center gap-unit-2">
+                                    <span class="material-symbols-outlined text-[var(--accent-teal)]">local_shipping</span>
+                                    Shipping Information
+                                </h2>
+                                <p class="font-body-md text-body-md text-[var(--text-secondary)]">Confirm details before submitting.</p>
+                            </div>
+                            <button data-go-view="checkout-shipping" class="text-[var(--accent-teal)] font-label-md text-label-md flex items-center gap-unit-1 hover:underline">
+                                <span class="material-symbols-outlined text-[16px]">edit</span> Edit
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-unit-6">
+                            <div class="p-unit-4 rounded-lg bg-[var(--bg-card)]">
+                                <p class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider mb-unit-1">Recipient</p>
+                                <p id="review-recipient" class="font-body-lg text-body-lg font-bold text-[var(--text-primary)]"></p>
+                            </div>
+                            <div class="p-unit-4 rounded-lg bg-[var(--bg-card)]">
+                                <p class="font-label-md text-label-md text-[var(--text-muted)] uppercase tracking-wider mb-unit-1">Address</p>
+                                <p id="review-address" class="font-body-md text-body-md text-[var(--text-primary)]"></p>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="card-dark p-unit-8 rounded-xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-[var(--accent-teal)]"></div>
+                        <div class="flex justify-between items-start mb-unit-6">
+                            <div>
+                                <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold flex items-center gap-unit-2">
+                                    <span class="material-symbols-outlined text-[var(--accent-teal)]">payments</span>
+                                    Payment Method
+                                </h2>
+                                <p class="font-body-md text-body-md text-[var(--text-secondary)]">Authorized via secured credit card channel.</p>
+                            </div>
+                            <button data-go-view="checkout-payment" class="text-[var(--accent-teal)] font-label-md text-label-md flex items-center gap-unit-1 hover:underline">
+                                <span class="material-symbols-outlined text-[16px]">edit</span> Edit
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-unit-4 p-unit-4 rounded-lg bg-[var(--bg-card)] border border-[var(--border-muted)]">
+                            <div class="w-12 h-8 bg-[var(--bg-elevated)] rounded flex items-center justify-center text-[var(--text-primary)] font-bold text-[10px] tracking-widest border border-[var(--border-muted)]">
+                                VISA
+                            </div>
+                            <div>
+                                <p id="review-card-name" class="font-body-lg text-body-lg font-bold text-[var(--text-primary)]"></p>
+                                <p id="review-card-expiry" class="font-body-md text-body-md text-[var(--text-secondary)]"></p>
+                            </div>
+                            <div class="ml-auto">
+                                <span class="material-symbols-outlined text-[var(--accent-teal)]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="card-dark p-unit-8 rounded-xl">
+                        <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold mb-unit-6 flex items-center gap-unit-2">
+                            <span class="material-symbols-outlined text-[var(--accent-teal)]">inventory_2</span>
+                            Review Order Items
+                        </h2>
+                        <div id="review-items" class="space-y-unit-6"></div>
+                    </section>
+                </div>
+                <div class="lg:col-span-4">
+                    <div class="sticky top-24 space-y-unit-6">
+                        <section class="card-dark p-unit-6 rounded-xl">
+                            <h3 class="font-label-md text-label-md text-[var(--text-primary)] uppercase mb-unit-3 font-bold">Apply Coupon Discount</h3>
+                            <div class="flex gap-unit-2">
+                                <input id="coupon-input" class="input-dark rounded-lg text-body-md px-unit-4 py-unit-2 w-full" placeholder="e.g. SAVE10, SAVE20" type="text" />
+                                <button id="apply-coupon-btn" class="btn-primary px-unit-4 py-unit-2 rounded-lg font-label-md text-label-md">Apply</button>
+                            </div>
+                            <p id="coupon-message" class="text-label-md mt-1 hidden"></p>
+                        </section>
+                        <section class="bg-[var(--bg-elevated)] p-unit-8 rounded-xl border border-[var(--border-muted)]">
+                            <h2 class="font-headline-md text-headline-md text-[var(--text-primary)] mb-unit-6 font-bold">Order Summary</h2>
+                            <div class="space-y-unit-4 border-b border-[var(--border-muted)] pb-unit-6 mb-unit-6">
+                                <div class="flex justify-between font-body-md text-body-md text-[var(--text-secondary)]">
+                                    <span>Subtotal</span>
+                                    <span id="summary-subtotal" class="text-[var(--text-primary)] font-bold"></span>
+                                </div>
+                                <div class="flex justify-between font-body-md text-body-md text-[var(--text-secondary)]">
+                                    <span>Shipping</span>
+                                    <span id="summary-shipping" class="text-[var(--text-primary)] font-bold"></span>
+                                </div>
+                                <div class="flex justify-between font-body-md text-body-md text-[var(--text-secondary)]">
+                                    <span>Estimated GST Tax (18%)</span>
+                                    <span id="summary-tax" class="text-[var(--text-primary)] font-bold"></span>
+                                </div>
+                                <div id="summary-discount-row" class="flex justify-between font-body-md text-body-md text-[var(--success)] hidden">
+                                    <span>Discount Applied</span>
+                                    <span id="summary-discount" class="font-bold"></span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-baseline mb-unit-8">
+                                <span class="font-headline-md text-headline-md text-[var(--text-primary)]">Total Amount</span>
+                                <span id="summary-total" class="font-display-lg text-display-lg font-black text-[var(--text-primary)]"></span>
+                            </div>
+                            <button class="btn-primary w-full py-unit-4 rounded-lg font-headline-md text-headline-md active:scale-[0.98] transition-all flex items-center justify-center gap-unit-2 group font-bold" id="placeOrderBtn">
+                                Place Order
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </button>
+                            <p class="mt-unit-6 text-center text-[var(--text-muted)] font-label-md text-label-md">
+                                By completing order, you align to LeapCart's <br/>
+                                <a class="underline hover:text-[var(--text-primary)]" href="#">Terms of Service</a> &amp; <a class="underline hover:text-[var(--text-primary)]" href="#">Privacy policies</a>.
+                            </p>
+                        </section>
+                        <div class="bg-[var(--bg-card)] p-unit-6 rounded-xl border border-[var(--border-muted)] space-y-unit-4">
+                            <div class="flex items-center gap-unit-4">
+                                <span class="material-symbols-outlined text-[var(--accent-teal)]" style="font-variation-settings: 'FILL' 1;">lock</span>
+                                <p class="font-label-md text-label-md text-[var(--text-secondary)]">Secure SSL Encrypted Gateways</p>
+                            </div>
+                            <div class="flex items-center gap-unit-4">
+                                <span class="material-symbols-outlined text-[var(--accent-teal)]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                <p class="font-label-md text-label-md text-[var(--text-secondary)]">LuxeCare 24/7 Premium Concierge</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 8: ORDER CONFIRMED SCREEN -->
+    <!-- ============================================== -->
+    <div id="view-order-confirmed" class="view-container hidden">
+        <main class="max-w-xl mx-auto px-unit-4 md:px-unit-12 pt-28 pb-unit-16 text-center">
+            <div class="w-20 h-20 bg-[var(--success)]/15 text-[var(--success)] rounded-full flex items-center justify-center mx-auto mb-unit-8 success-glow">
+                <span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            </div>
+            <h2 class="font-headline-lg text-display-lg font-black text-[var(--text-primary)] mb-unit-4">Order Confirmed!</h2>
+            <p class="font-body-lg text-body-lg text-[var(--text-secondary)] mb-unit-8 max-w-md mx-auto">
+                Thank you for your purchase. Your order <span id="confirmed-order-id" class="font-bold text-[var(--text-primary)]">#LX-99210</span> is being processed. 
+                Our concierges are preparing your package for shipment.
+            </p>
+            <div class="flex flex-col gap-unit-4">
+                <button data-go-view="order-tracker" class="btn-primary w-full py-unit-4 rounded-lg font-headline-md text-headline-md active:scale-[0.98] transition-all flex items-center justify-center gap-unit-2">
+                    Track Your Package <span class="material-symbols-outlined">local_shipping</span>
+                </button>
+                <button data-go-view="shop" class="btn-ghost w-full py-unit-4 rounded-lg font-headline-md text-headline-md transition-colors">
+                    Back to Store
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- VIEW CONTAINER 9: ENHANCED ORDER TRACKER -->
+    <!-- ============================================== -->
+    <div id="view-order-tracker" class="view-container hidden">
+        <main class="max-w-5xl mx-auto px-unit-4 md:px-unit-12 pt-24 pb-unit-12">
+            <section class="flex flex-col items-center text-center mb-unit-12">
+                <div class="w-20 h-20 bg-[var(--accent-teal)]/15 rounded-full flex items-center justify-center mb-unit-6 success-glow">
+                    <span class="material-symbols-outlined text-[var(--accent-teal)] text-4xl" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+                </div>
+                <h1 class="font-headline-lg text-headline-lg md:text-display-lg font-black text-[var(--text-primary)] mb-unit-2">Track Your Shipment</h1>
+                <p class="font-body-lg text-body-lg text-[var(--text-secondary)] max-w-lg mx-auto">
+                    Your order will be delivered within 4–5 business days.
+                </p>
+            </section>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-unit-8">
+                <div class="lg:col-span-8 space-y-unit-8">
+                    <div class="card-dark p-unit-6 rounded-xl flex flex-wrap justify-between items-center gap-unit-4">
+                        <div>
+                            <span class="font-label-md text-label-md text-[var(--text-muted)] block mb-1">ORDER ID</span>
+                            <span id="tracker-order-id" class="font-headline-md text-headline-md text-[var(--text-primary)] font-bold"></span>
+                        </div>
+                        <div class="h-10 w-px bg-[var(--border-muted)] hidden md:block"></div>
+                        <div>
+                            <span class="font-label-md text-label-md text-[var(--text-muted)] block mb-1">CARRIER COURIER</span>
+                            <span class="font-headline-md text-headline-md text-[var(--accent-teal)] font-bold">LuxeExpress Premium</span>
+                        </div>
+                        <div class="h-10 w-px bg-[var(--border-muted)] hidden md:block"></div>
+                        <div>
+                            <span class="font-label-md text-label-md text-[var(--text-muted)] block mb-1">STATUS</span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] font-label-md text-label-md font-bold">
+                                Processing Dispatch
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-dark p-unit-8 rounded-xl overflow-hidden">
+                        <h3 class="font-headline-md text-headline-md mb-unit-8 font-bold text-[var(--text-primary)]">Shipment Stepper Progress</h3>
+                        <div class="relative px-4 py-2">
+                            <div class="absolute top-7 left-4 right-4 h-1 bg-[var(--bg-card)] rounded-full z-0"></div>
+                            <div id="tracker-progress-fill" class="absolute top-7 left-4 h-1 bg-[var(--accent-teal)] rounded-full z-0 progress-bar-fill-0"></div>
+                            <div class="relative flex justify-between z-10">
+                                <div class="tracker-step flex flex-col items-center text-center fade-in-up">
+                                    <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center z-10 border-4 border-[var(--bg-section)] shadow-md">
+                                        <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                                    </div>
+                                    <span class="mt-unit-3 font-label-md text-label-md text-[var(--text-primary)] font-bold">Order Placed</span>
+                                    <span class="text-[10px] text-[var(--text-muted)]">Just Now</span>
+                                </div>
+                                <div class="tracker-step flex flex-col items-center text-center fade-in-up">
+                                    <div class="w-10 h-10 rounded-full bg-[var(--accent-teal)] text-[var(--text-dark)] flex items-center justify-center z-10 border-4 border-[var(--bg-section)] status-pulse-active shadow-md">
+                                        <span class="material-symbols-outlined text-lg">inventory_2</span>
+                                    </div>
+                                    <span class="mt-unit-3 font-label-md text-label-md text-[var(--text-primary)] font-bold">Processing</span>
+                                    <span class="text-[10px] text-[var(--text-muted)] text-[var(--accent-teal)] font-bold animate-pulse">In Progress</span>
+                                </div>
+                                <div class="tracker-step flex flex-col items-center text-center opacity-40 fade-in-up">
+                                    <div class="w-10 h-10 rounded-full bg-[var(--bg-card)] text-[var(--text-muted)] flex items-center justify-center z-10 border-4 border-[var(--bg-section)]">
+                                        <span class="material-symbols-outlined text-lg">local_shipping</span>
+                                    </div>
+                                    <span class="mt-unit-3 font-label-md text-label-md font-bold text-[var(--text-muted)]">Shipped</span>
+                                </div>
+                                <div class="tracker-step flex flex-col items-center text-center opacity-40 fade-in-up">
+                                    <div class="w-10 h-10 rounded-full bg-[var(--bg-card)] text-[var(--text-muted)] flex items-center justify-center z-10 border-4 border-[var(--bg-section)]">
+                                        <span class="material-symbols-outlined text-lg">done_all</span>
+                                    </div>
+                                    <span class="mt-unit-3 font-label-md text-label-md font-bold text-[var(--text-muted)]">Delivered</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-dark p-unit-6 rounded-xl">
+                        <h3 class="font-headline-md text-headline-md mb-unit-6 font-bold text-[var(--text-primary)]">Shipment Items</h3>
+                        <div id="tracker-items" class="space-y-unit-4"></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 space-y-unit-8">
+                    <div class="card-dark p-unit-6 rounded-xl">
+                        <div class="flex items-center gap-unit-2 mb-unit-4 text-[var(--accent-teal)]">
+                            <span class="material-symbols-outlined">location_on</span>
+                            <h3 class="font-headline-md text-headline-md font-bold text-[var(--text-primary)]">Shipping Destination</h3>
+                        </div>
+                        <div class="space-y-unit-1">
+                            <p id="tracker-recipient" class="font-body-lg text-body-lg font-bold text-[var(--text-primary)]"></p>
+                            <p id="tracker-address" class="font-body-md text-body-md text-[var(--text-secondary)]"></p>
+                            <p id="tracker-phone" class="mt-unit-4 font-body-md text-body-md text-[var(--text-secondary)] pt-unit-4 border-t border-[var(--border-muted)]"></p>
+                        </div>
+                    </div>
+                    <div class="card-dark p-unit-6 rounded-xl">
+                        <div class="flex items-center gap-unit-2 mb-unit-4 text-[var(--accent-teal)]">
+                            <span class="material-symbols-outlined">payments</span>
+                            <h3 class="font-headline-md text-headline-md font-bold text-[var(--text-primary)]">Billing Details</h3>
+                        </div>
+                        <div class="flex items-center gap-unit-3">
+                            <div class="bg-[var(--bg-card)] p-2 rounded">
+                                <span class="material-symbols-outlined text-[var(--text-primary)]">credit_card</span>
+                            </div>
+                            <div>
+                                <p id="tracker-payment" class="font-body-md text-body-md font-bold text-[var(--text-primary)]"></p>
+                                <p class="font-label-md text-label-md text-[var(--text-secondary)]">Charged amount: <span id="tracker-total" class="font-bold text-[var(--text-primary)]"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-unit-4">
+                        <button data-go-view="shop" class="btn-primary font-bold py-unit-4 px-unit-6 rounded-lg active:scale-95 transition-all flex items-center justify-center gap-unit-2">
+                            <span class="material-symbols-outlined">arrow_forward</span> Continue Store Shopping
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- CART PAGE VIEW -->
+    <!-- ============================================== -->
+    <div id="view-cart" class="view-container hidden">
+        <main class="max-w-4xl mx-auto px-unit-4 md:px-unit-12 pt-28 pb-unit-16 min-h-screen">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-unit-4 mb-unit-8">
+                <div>
+                    <h1 class="font-headline-lg text-headline-lg font-black text-[var(--text-primary)]">Shopping Cart</h1>
+                    <p class="font-body-lg text-body-lg text-[var(--text-secondary)]">Review and manage your selected items</p>
+                </div>
+                <button data-go-view="shop" class="btn-ghost px-unit-4 py-unit-2 rounded-lg font-label-md text-label-md flex items-center gap-unit-2 self-start md:self-auto">
+                    <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                    Continue Shopping
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-unit-8">
+                <div class="lg:col-span-2 space-y-unit-4" id="cart-page-items">
+                    <div class="text-center py-unit-16 text-[var(--text-muted)]">
+                        <span class="material-symbols-outlined text-5xl block mb-unit-4">shopping_cart</span>
+                        <p class="font-body-lg text-body-lg">Your cart is empty</p>
+                        <button data-go-view="shop" class="btn-primary mt-unit-4 px-unit-6 py-unit-2 rounded-lg font-label-md text-label-md inline-flex items-center gap-unit-2">
+                            Start Shopping
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div class="card-dark p-unit-6 rounded-xl sticky top-28">
+                        <h3 class="font-headline-md text-headline-md font-bold text-[var(--text-primary)] mb-unit-6">Order Summary</h3>
+                        <div class="space-y-unit-4">
+                            <div class="flex justify-between items-center">
+                                <span class="font-body-md text-body-md text-[var(--text-secondary)]">Subtotal</span>
+                                <span class="font-body-lg text-body-lg font-bold text-[var(--text-primary)]" id="cart-page-subtotal">₹0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-body-md text-body-md text-[var(--text-secondary)]">Items</span>
+                                <span class="font-body-md text-body-md text-[var(--text-secondary)]" id="cart-page-count">0 items</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-[var(--border-muted)] mt-unit-6 pt-unit-6 space-y-unit-4">
+                            <button id="checkout-page-btn" class="btn-primary rounded-xl py-unit-3 text-center w-full font-label-md text-label-md font-bold disabled:opacity-40 disabled:cursor-not-allowed">
+                                Proceed to Checkout
+                            </button>
+                            <button class="clear-cart-btn w-full text-center text-[var(--text-muted)] hover:text-[var(--error)] font-label-md text-label-md transition-colors">
+                                Clear Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- GLOBAL CORE COMPONENT: SLIDING CART DRAWER -->
+    <!-- ============================================== -->
+    <div class="fixed right-0 top-0 h-full w-full md:w-96 bg-[var(--bg-section)] z-[60] shadow-2xl transition-transform duration-500 translate-x-full flex flex-col border-l border-[var(--border-muted)]" id="cart-drawer">
+        <div class="p-unit-6 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-unit-8">
+                <div>
+                    <h2 class="font-headline-md text-headline-md text-[var(--accent-teal)] font-black">Shopping Cart</h2>
+                    <p class="font-body-lg text-body-lg text-[var(--text-secondary)]">Your selected treasures</p>
+                </div>
+                <button class="close-cart-btn material-symbols-outlined p-unit-2 hover:bg-[var(--bg-card)] rounded-full text-[var(--text-primary)]">close</button>
+            </div>
+            <div class="flex-grow rounded-2xl mb-unit-6 relative overflow-y-auto" id="cart-items-container" style="max-height: calc(100vh - 350px);">
+                <div class="hidden w-full space-y-unit-4 text-left" id="cart-items"></div>
+            </div>
+            <div class="mt-auto space-y-unit-4">
+                <div class="flex justify-between items-center pt-unit-4 border-t border-[var(--border-muted)]">
+                    <span class="font-body-lg text-body-lg text-[var(--text-secondary)]">Subtotal</span>
+                    <span class="font-headline-md text-headline-md text-[var(--text-primary)] font-black" id="cart-total">₹0</span>
+                </div>
+                <button id="checkout-drawer-btn" class="btn-primary rounded-xl py-unit-3 text-center w-full font-label-md text-label-md active:scale-95 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
+                    Checkout Now
+                </button>
+                <div class="flex gap-unit-4 justify-between">
+                    <button class="flex items-center gap-unit-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-unit-2 px-unit-4">
+                        <span class="material-symbols-outlined text-[20px]">bookmark</span>
+                        <span class="font-label-md text-label-md">Save for Later</span>
+                    </button>
+                    <button class="clear-cart-btn flex items-center gap-unit-2 text-[var(--text-secondary)] hover:text-[var(--error)] transition-colors py-unit-2 px-unit-4">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                        <span class="font-label-md text-label-md">Clear All</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] hidden transition-opacity duration-300 opacity-0" id="drawer-backdrop"></div>
 
     <!-- Footer -->
-    <footer>
-        <a href="#" class="back-to-top">Back to top</a>
-        <div class="footer-links">
-            <div class="link-column">
-                <h3>Get to Know Us</h3>
-                <a href="#">Careers</a>
-                <a href="#">Blog</a>
-                <a href="#">About Amazon</a>
+    <footer class="bg-[var(--bg-elevated)] py-unit-16 mt-unit-16 border-t border-[var(--border-muted)]">
+        <div class="max-w-7xl mx-auto px-unit-4 md:px-unit-12 grid grid-cols-1 md:grid-cols-4 gap-unit-8">
+            <div class="col-span-1 md:col-span-1">
+                <div class="font-display-lg text-headline-lg font-black tracking-tight text-[var(--text-primary)] mb-unit-4">
+                    LeapCart
+                </div>
+                <p class="font-body-md text-body-md text-[var(--text-secondary)] leading-relaxed">
+                    Defining the next generation of e-commerce styling, responsive aesthetics, and premium interactions. LeapCart offers an elite curated selection of designer apparel, cutting-edge electronics, and handcrafted lifestyle essentials.
+                </p>
             </div>
-            <div class="link-column">
-                <h3>Make Money with Us</h3>
-                <a href="#">Sell products</a>
-                <a href="#">Sell on Amazon Business</a>
-                <a href="#">Become an Affiliate</a>
+            <div>
+                <h5 class="font-label-md text-label-md text-[var(--text-primary)] mb-unit-4 font-bold">Categories</h5>
+                <ul class="space-y-unit-2 font-body-md text-body-md text-[var(--text-secondary)]">
+                    <li class="category-card hover:text-[var(--text-primary)] cursor-pointer transition-colors" data-category="Apparel">Apparel</li>
+                    <li class="category-card hover:text-[var(--text-primary)] cursor-pointer transition-colors" data-category="Electronics">Electronics</li>
+                    <li class="category-card hover:text-[var(--text-primary)] cursor-pointer transition-colors" data-category="Accessories">Accessories</li>
+                    <li class="category-card hover:text-[var(--text-primary)] cursor-pointer transition-colors" data-category="Fitness">Fitness</li>
+                    <li class="category-card hover:text-[var(--text-primary)] cursor-pointer transition-colors" data-category="Home Decor">Home Decor</li>
+                    <li class="category-card hover:text-[var(--text-primary)] cursor-pointer transition-colors" data-category="Home & Kitchen">Home & Kitchen</li>
+                </ul>
             </div>
-            <div class="link-column">
-                <h3>Amazon Payment Products</h3>
-                <a href="#">Amazon Business Card</a>
-                <a href="#">Shop with Points</a>
-                <a href="#">Reload Your Balance</a>
+            <div>
+                <h5 class="font-label-md text-label-md text-[var(--text-primary)] mb-unit-4 font-bold">Support & Help</h5>
+                <ul class="space-y-unit-2 font-body-md text-body-md text-[var(--text-secondary)]">
+                    <li class="hover:text-[var(--text-primary)] cursor-pointer transition-colors" data-go-view="about-section">About Us</li>
+                    <li class="hover:text-[var(--text-primary)] cursor-pointer transition-colors">Contact Us</li>
+                    <li class="hover:text-[var(--text-primary)] cursor-pointer transition-colors">Shipping Options</li>
+                    <li class="hover:text-[var(--text-primary)] cursor-pointer transition-colors">Returns Policy</li>
+                    <li class="hover:text-[var(--text-primary)] cursor-pointer transition-colors">FAQ & Support</li>
+                </ul>
             </div>
-            <div class="link-column">
-                <h3>Let Us Help You</h3>
-                <a href="#">Your Account</a>
-                <a href="#">Your Orders</a>
-                <a href="#">Help</a>
+            <div>
+                <h5 class="font-label-md text-label-md text-[var(--text-primary)] mb-unit-4 font-bold">Newsletter</h5>
+                <p class="font-body-md text-body-md text-[var(--text-secondary)] mb-unit-4 leading-relaxed">Get early access to exclusive catalog drops, promotions, and new product releases.</p>
+                <div class="flex gap-unit-2">
+                    <input class="input-dark rounded-lg text-body-md px-unit-4 py-unit-2 w-full" placeholder="Email Address" type="email" />
+                    <button class="btn-primary px-unit-4 py-unit-2 rounded-lg font-label-md text-label-md font-bold active:scale-95">Join</button>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="footer-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo">
+        <div class="max-w-7xl mx-auto px-unit-4 md:px-unit-12 mt-unit-16 pt-unit-8 border-t border-[var(--border-muted)] flex flex-col md:flex-row justify-between items-center font-label-md text-[11px] text-[var(--text-muted)]">
+            <p>© 2026 LeapCart Premium Storefront. All rights reserved.</p>
+            <div class="flex gap-unit-6 mt-unit-4 md:mt-0">
+                <a href="#" class="hover:text-[var(--text-primary)] transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-[var(--text-primary)] transition-colors">Terms of Service</a>
             </div>
-            <p>&copy; 2026, Amazon.com, Inc. or its affiliates</p>
         </div>
     </footer>
-</body>
 
+    <!-- App Coordination Script -->
+    <script type="module" src="js/script.js"></script>
+</body>
 </html>
