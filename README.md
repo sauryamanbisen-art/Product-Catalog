@@ -199,128 +199,154 @@ sequenceDiagram
     Order-->>Customer: Generate Order ID & open Tracker
 ```
 
+---
 
+## 📂 Directory Structure
 
-#  Recommended Tech Stack
-
-## Core
-
-* HTML
-* CSS
-* JavaScript
-
-## Optional Modern Stack
-
-* React
-* Tailwind CSS
-* Context API / Redux
+```plaintext
+Product-Catalog/
+│
+├── index.html                   # Master SPA layout, views & templates
+├── README.md                    # Comprehensive technical documentation
+│
+├── css/
+│   └── styles.css               # Design system tokens, glassmorphism, animations & custom sliders
+│
+├── js/
+│   ├── script.js                # Core app orchestrator, SPA view router & event coordinator
+│   │
+│   ├── constants/
+│   │   ├── coupons.js           # Available coupon codes & discount calculation rules
+│   │   └── filterDefaults.js    # Initial baseline filter configuration
+│   │
+│   ├── context/
+│   │   ├── actionTypes.js       # Action constants for app state updates
+│   │   ├── AppReducer.js        # Predictable state transition reducer logic
+│   │   └── initialState.js      # Global default application state definition
+│   │
+│   ├── core/
+│   │   └── store.js             # Centralized pub/sub state store container
+│   │
+│   ├── data/
+│   │   └── products.js          # Complete catalog database (270 curated items)
+│   │
+│   ├── modules/
+│   │   ├── checkout_module.js   # Checkout event bindings & form handling logic
+│   │   ├── dragdrop.js          # HTML5 drag-and-drop listeners & drop-zone tray
+│   │   └── search_filter.js     # Search history, debounce, and faceted filter engine
+│   │
+│   └── utils/
+│       ├── calculations.js      # Cart subtotal, tax, and discount math utilities
+│       ├── checkout_validator.js# Luhn algorithm, email, phone & pincode validators
+│       ├── imageValidator.js    # Image fallback resolver & fallback handler
+│       └── localStorage.js      # Safe storage abstraction for cart & search history
+│
+└── assets/
+    ├── products/                # 270+ high-resolution product imagery assets
+    ├── images/                  # UI vector graphics and badges
+    └── videos/                  # Media assets for hero visual presentation
+```
 
 ---
 
-#  Suggested Project Structure
+## 🛠️ Tech Stack & Design Tokens
 
+### Technologies
+* **Structure**: Semantic HTML5 (Custom data views, container queries, accessible forms)
+* **Styling**: Tailwind CSS (via CDN) paired with custom CSS3 custom properties
+* **Icons & Typography**: Google Fonts (`Inter`), Google Material Symbols Outlined
+* **Logic**: Vanilla ECMAScript 2022 (ES Modules, Array Methods, Async/Await)
+* **Persistence**: Browser Web Storage API (`localStorage`)
+
+### Color Palette
+
+| Token | Hex Code | Visual Preview | Application |
+| :--- | :--- | :--- | :--- |
+| `--bg-main-start` | `#080F14` | `⬛ Dark Navy` | Base app background |
+| `--bg-card` | `#1F2430` | `⬛ Card Dark` | Product & container cards |
+| `--accent-teal` | `#00B8A9` | `🟩 Vibrant Teal` | Primary brand accent & highlights |
+| `--accent-coral` | `#FF7A59` | `🟧 Bright Coral` | Badges & active selections |
+| `--accent-amber` | `#FFC857` | `🟨 Warm Gold` | Ratings, reviews & sale tags |
+| `--text-primary` | `#F7F8FA` | `⬜ Crisp White` | Headlines & primary content |
+| `--text-secondary`| `#C8D0DA` | `🔘 Muted Slate` | Descriptions & metadata |
+
+---
+
+## 🚀 Getting Started
+
+Because LeapCart uses standard native ES Modules, no compilation, npm install, or bundler is required.
+
+### Prerequisites
+A modern web browser supporting ES6 Modules:
+* Chrome / Edge 80+
+* Firefox 75+
+* Safari 13.1+
+
+### Running Locally
+
+To serve the project with proper MIME type support for ES modules, use any local HTTP server:
+
+#### Option 1: VS Code Live Server (Recommended)
+1. Open the project folder in **Visual Studio Code**.
+2. Install the **Live Server** extension.
+3. Right-click `index.html` and choose **"Open with Live Server"**.
+
+#### Option 2: Python HTTP Server
 ```bash
-src/
-│
-├── components/
-│   ├── Header
-│   ├── SearchBar
-│   ├── Filters
-│   ├── ProductList
-│   ├── ProductCard
-│   ├── Cart
-│   ├── CartItem
-│   └── CheckoutForm
-│
-├── data/
-│   └── products.js
-│
-├── styles/
-│   └── global.css
-│
-├── App.js
-└── main.js
+# In the project directory:
+python3 -m http.server 8000
+```
+Then visit: `http://localhost:8000`
+
+#### Option 3: Node.js `npx serve`
+```bash
+npx serve .
 ```
 
 ---
 
-#  Sample Product Data
+## 📋 Form Validation Rules
 
-```js
-{
-  id: 1,
-  title: "Wireless Headphones",
-  category: "Electronics",
-  price: 2999,
-  rating: 4.5,
-  image: "image-url"
-}
-```
+LeapCart enforces strict frontend validation prior to checkout submission:
 
----
-
-#  Functional Requirements
-
-| ID    | Requirement                | Priority     |
-| ----- | -------------------------- | ------------ |
-| FR-1  | Product catalog rendering  | MUST HAVE    |
-| FR-2  | Product search             | MUST HAVE    |
-| FR-3  | Category filter            | MUST HAVE    |
-| FR-4  | Price range filter         | MUST HAVE    |
-| FR-5  | Rating filter              | MUST HAVE    |
-| FR-6  | Multiple filters together  | MUST HAVE    |
-| FR-7  | Add to cart button         | MUST HAVE    |
-| FR-8  | Drag-and-drop cart         | MUST HAVE    |
-| FR-9  | Cart totals                | MUST HAVE    |
-| FR-10 | Quantity controls          | MUST HAVE    |
-| FR-11 | Checkout form validation   | MUST HAVE    |
-| FR-12 | Validation error handling  | MUST HAVE    |
-| FR-13 | Responsive design          | MUST HAVE    |
-| FR-14 | Local Storage persistence  | GOOD TO HAVE |
-| FR-15 | Animations and transitions | GOOD TO HAVE |
+| Field | Validation Requirement | Error Feedback |
+| :--- | :--- | :--- |
+| **Full Name** | Minimum 3 non-whitespace characters | *"Name must be at least 3 characters"* |
+| **Email Address** | Valid RFC-compliant format (`name@domain.com`) | *"Enter a valid email address"* |
+| **Phone Number** | Exactly 10 numeric digits | *"Phone must be 10 digits, numbers only"* |
+| **Street Address**| Non-empty string | *"Street address is required"* |
+| **City** | Non-empty string | *"City is required"* |
+| **Pincode** | Exactly 6 numeric digits | *"Pincode must be 6 digits, numbers only"* |
+| **Card Number** | 13–19 digits validated with Luhn Algorithm | *"Invalid card number (checksum failed)"* |
+| **Expiry Date** | Valid future month/year (`MM/YY`) | *"Card has expired or invalid date"* |
+| **CVV Code** | 3 or 4 numeric digits | *"Invalid CVV (3 or 4 digits required)"* |
 
 ---
 
-#  Error Handling
+## 💡 Developer Extensibility
 
-| Scenario                  | Expected Behaviour        |
-| ------------------------- | ------------------------- |
-| Empty search results      | Show “No products found”  |
-| Empty cart                | Show empty cart message   |
-| Invalid form input        | Inline validation message |
-| Checkout without products | Prevent submission        |
-
----
-
-#  Future Improvements
-
-Future features that can be added later:
-
-* Wishlist
-* Product details page
-* Authentication
-* Payment gateway integration
-* Coupons and discounts
-* Backend API
-* Order history
-* Product sorting
+* **Adding New Products**: Extend the `products` array in `js/data/products.js` following the object schema:
+  ```javascript
+  {
+    id: 271,
+    title: "New Product Title",
+    name: "New Product Title",
+    category: "Electronics",
+    subcategory: "Audio",
+    brand: "BrandName",
+    description: "Detailed product specifications and highlights...",
+    image: "assets/products/your-image.jpg",
+    price: 4999,
+    rating: 4.8,
+    stockStatus: "In Stock"
+  }
+  ```
+* **Adding New Coupons**: Add new discount configurations to `js/constants/coupons.js`.
+* **State Management**: LeapCart includes a Pub/Sub Store in `js/core/store.js` and Reducer in `js/context/AppReducer.js` for developers wishing to migrate to unidirectional state dispatch.
 
 ---
 
+## 📄 License & Attribution
 
-#  Expected UI Sections
-
-* Header/Navbar
-* Search Bar
-* Filter Sidebar
-* Product Grid
-* Shopping Cart
-* Checkout Form
-* Success/Error Messages
-
----
-
-
-
-
-
+Developed with ❤️ as a modern, clean, and educational frontend engineering showcase.  
+All brand names, trademarks, and sample product photos belong to their respective copyright holders and are used for mock demonstrational purposes only.
