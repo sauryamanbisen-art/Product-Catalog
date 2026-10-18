@@ -1,26 +1,44 @@
-#  Product Catalog with Cart & Checkout System
+# 🛍️ LeapCart — Premium E-Commerce Catalog & Checkout Platform
 
-A modern ecommerce-style frontend application where users can browse products, search items, apply filters, manage a shopping cart, use drag-and-drop interactions, and complete a validated checkout flow.
+<div align="center">
 
-This project is designed to help developers practice real-world frontend development concepts like state management, filtering logic, component communication, form validation, responsive UI design, and drag-and-drop functionality.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript ES6+](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![SPA Routing](https://img.shields.io/badge/SPA-History_API-6366F1?style=for-the-badge)
+![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero_Build_Step-00B8A9?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)
+
+<p align="center">
+  <b>A state-of-the-art, responsive e-commerce web application featuring real-time faceted search, native HTML5 drag-and-drop cart addition, multi-step validated checkout, coupon engine, and live order tracking.</b>
+</p>
+
+[✨ Live Features](#-key-features) •
+[📐 Architecture](#-system-architecture) •
+[🧭 User Flow](#-application-workflow) •
+[📂 Project Structure](#-directory-structure) •
+[🚀 Quick Start](#-getting-started) •
+[🎟️ Promo Codes](#-promotional-coupons)
+
+</div>
 
 ---
 
-# Project Objective
+## 🌟 Executive Summary
 
-Build a responsive and interactive product catalog application that simulates a real online shopping experience.
+**LeapCart** is a modern frontend e-commerce platform built without heavy frameworks to prove the power of modern vanilla web standards. Powered by clean HTML5, custom CSS design tokens, Tailwind CSS utility classes, and modular ES6+ JavaScript, LeapCart delivers a native app-like experience with zero compilation overhead.
 
-Users should be able to:
-
-* Browse products visually
-* Search products instantly
-* Filter products using multiple conditions
-* Add/remove items from cart
-* Update cart quantities
-* Drag products into cart
-* Complete checkout with form validation
+### ⚡ Key Metrics
+* **270+ Curated Products** with high-resolution imagery, detailed descriptions, ratings, and stock status.
+* **6 Major Categories & 20+ Subcategories** across Electronics, Apparel, Accessories, Fitness, Home Decor, and Kitchen.
+* **8 Dynamic SPA Views** coordinated seamlessly via the browser History API without page reloads.
+* **Dual-Input Range Slider** synchronizing dual thumbs and numerical inputs for price filtering up to ₹70,000.
+* **Native Drag-and-Drop Shopping** allowing items to be dragged directly into a responsive floating drop zone.
+* **3-Step Checkout Flow** with Luhn-algorithm card validation, phone/pincode format checks, and instant review.
 
 ---
+
 
 #  Features
 
