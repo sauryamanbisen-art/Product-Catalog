@@ -82,28 +82,51 @@
 * **Item Controls**: Instant quantity adjustment (`+` / `-`), individual item deletion, and "Clear Cart" reset.
 * **LocalStorage Persistence**: Full cart state survives browser refreshes and tab closures.
 
+### 5. 💳 Multi-Step Validated Checkout
+A structured 3-phase checkout pipeline ensures accurate order placement:
 
+```
+[ Step 1: Shipping Address ] ➔ [ Step 2: Payment Method ] ➔ [ Step 3: Order Review ] ➔ [ Confirmation ]
+```
 
+* **Step 1: Shipping Address**:
+  * Real-time inline field validation for Full Name, Email, 10-digit Phone, Street, City, and 6-digit Pincode.
+  * Informative inline error messages with ARIA live region support.
+* **Step 2: Payment Options**:
+  * **Cash on Delivery (COD)**: Instant selection with zero transaction friction.
+  * **UPI / QR Code**: Handles VPA format validation (`username@bank`) or interactive simulated QR scan.
+  * **Credit / Debit Card**:
+    * Automatic card issuer detection (Visa, MasterCard, American Express, RuPay).
+    * Auto-spaced 16-digit card number formatting.
+    * Luhn Algorithm checksum verification.
+    * Auto-formatted MM/YY expiration dates and 3/4-digit CVV checks.
+* **Step 3: Review & Summary**:
+  * Comprehensive itemized breakdown, recipient details, payment method recap, delivery fee calculation, and coupon discount deduction.
 
-Validated checkout form including:
+### 6. 🎟️ Promotional Coupons & Discounts
+Integrated coupon validation module with automated discount computation:
 
-* Full Name
-* Email Address
-* Phone Number
-* Shipping Address
-* City
-* Pincode
-* Payment Method
+| Code | Type | Value | Condition / Scope |
+| :--- | :--- | :--- | :--- |
+| `WELCOME10` | Percentage | **10% OFF** | Entire order |
+| `SAVE200` | Flat | **₹200 OFF** | Entire order |
+| `FASHION15` | Percentage | **15% OFF** | Apparel & Fashion items |
+| `ELECTRO10` | Percentage | **10% OFF** | Electronics category |
+| `FESTIVE20` | Percentage | **20% OFF** | Festival celebration sale |
+| `FIRSTBUY` | Percentage | **20% OFF** | New customer special |
+| `HOME250` | Flat | **₹250 OFF** | Home Decor & Kitchen items |
 
-Validation includes:
-
-* Required fields
-* Email format checking
-* Numeric validation
-* Inline error messages
-* Prevent invalid submission
+### 7. 🚚 Order Confirmation & Simulated Tracker
+* **Celebratory Order View**: Generates a unique order tracking ID (e.g., `LX-98241`), delivery estimate, and order recap.
+* **Live Order Tracker (`#view-order-tracker`)**: Five-phase interactive progression:
+  1. `Order Placed`
+  2. `Processing`
+  3. `Shipped`
+  4. `Out for Delivery`
+  5. `Delivered`
 
 ---
+
 
 #  Responsive Design
 
