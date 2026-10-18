@@ -127,36 +127,79 @@ Integrated coupon validation module with automated discount computation:
 
 ---
 
+## 📐 System Architecture
 
-#  Responsive Design
+LeapCart follows a clean **modular Single Page Application (SPA)** architecture without requiring a bundler:
 
-Application is optimized for:
-
-* Desktop
-* Tablet
-* Mobile Devices
-
-Responsive features include:
-
-* Adaptive grid layouts
-* Mobile-friendly cart
-* Flexible filter section
+```mermaid
+graph TD
+    User([User Interaction]) --> Router[Client-side Router / History API]
+    
+    subgraph UI Views
+        VHome[Home View]
+        VShop[Shop Catalog View]
+        VCart[Cart Drawer / Page]
+        VShip[Checkout: Shipping]
+        VPay[Checkout: Payment]
+        VRev[Checkout: Review]
+        VConf[Order Confirmed]
+        VTrack[Order Tracker]
+    end
+    
+    Router --> VHome
+    Router --> VShop
+    Router --> VCart
+    Router --> VShip
+    Router --> VPay
+    Router --> VRev
+    Router --> VConf
+    Router --> VTrack
+    
+    subgraph Core Modules
+        SF[search_filter.js]
+        DD[dragdrop.js]
+        VAL[checkout_validator.js]
+        LS[localStorage.js]
+        DATA[(products.js - 270 Items)]
+    end
+    
+    VShop <--> SF
+    VShop <--> DD
+    SF --> DATA
+    VCart <--> LS
+    VShip & VPay --> VAL
+```
 
 ---
 
-#  Frontend Concepts Practiced
+## 🧭 Application Workflow
 
-* State Management
-* Array Filtering
-* Controlled Components
-* Form Validation
-* Drag and Drop API
-* Conditional Rendering
-* Local Storage
-* Responsive UI Design
-* Component Communication
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Customer
+    participant Catalog as Catalog Grid
+    participant Cart as Cart System
+    participant LocalStorage as Web Storage
+    participant Checkout as Multi-Step Checkout
+    participant Order as Order Tracker
 
----
+    Customer->>Catalog: Search & Filter items
+    Customer->>Catalog: Drag card or click "Add to Cart"
+    Catalog->>Cart: Dispatch item payload
+    Cart->>LocalStorage: Save updated cart state
+    Cart-->>Customer: Display toast & update badge
+    Customer->>Checkout: Proceed to Checkout
+    Checkout->>Customer: Validate shipping info (Step 1)
+    Checkout->>Customer: Select payment & validate (Step 2)
+    Customer->>Checkout: Apply promo code (e.g., WELCOME10)
+    Checkout->>Customer: Review breakdown (Step 3)
+    Customer->>Order: Place Order
+    Order->>LocalStorage: Clear active cart
+    Order-->>Customer: Generate Order ID & open Tracker
+```
+
+
 
 #  Recommended Tech Stack
 
