@@ -39,66 +39,51 @@
 
 ---
 
+## 📸 Core Highlights at a Glance
 
-#  Features
-
-##  Product Catalog
-
-* Responsive product grid layout
-* Product cards displaying:
-
-  * Image
-  * Title
-  * Category
-  * Price
-  * Rating
-* Optional product detail modal/page
+| Feature | Description | Tech Used |
+| :--- | :--- | :--- |
+| **Faceted Catalog** | Instant multi-condition filtering by keyword, category, subcategory, price, and star rating. | Array higher-order functions & Debounce |
+| **Drag & Drop Cart** | Intuitive desktop drag-and-drop interaction with floating drop-zone tray and visual physics. | HTML5 Drag & Drop API |
+| **Sliding Cart Drawer & Page** | Accessible slide-over drawer + dedicated cart page with quantity adjustments and LocalStorage sync. | Custom CSS Transitions & Web Storage |
+| **Smart Coupon Engine** | Percentage and flat discount codes with live validation and calculation safeguards. | Dynamic discount reducer |
+| **3-Step Checkout Flow** | Modular shipping validation, payment verification, and consolidated order confirmation. | Luhn algorithm & regex validators |
+| **Real-time Order Tracker** | Interactive timeline with visual tracking nodes from order placement to doorstep delivery. | Dynamic state machine |
 
 ---
 
-##  Search Functionality
+## 🎯 Key Features
 
-* Real-time product search
-* Keyword-based filtering
-* Instant UI updates while typing
+### 1. 🔍 Instant Search & Search History
+* **Real-time Querying**: Instant item matching across product names, descriptions, and categories as the user types.
+* **Debounced Execution**: Smooth performance without lag or dropped frames during rapid keyboard input.
+* **Search History Dropdown**: Automatically remembers and suggests up to 3 recent searches stored in `localStorage`.
+* **Cross-Input Synchronization**: Search state persists across top navigation, hero search, and catalog views.
 
----
+### 2. 🎛️ Deep Faceted Filtering System
+* **Dual-Thumb Interactive Price Slider**: Custom dual-slider supporting simultaneous minimum and maximum bounds with synchronized numerical inputs and active track highlighting.
+* **Category & Subcategory Pills**: Responsive category sidebar with dynamic subcategory chips that adjust based on selected parent categories.
+* **Rating Filters**: One-click star rating filtering (1★ through 5★).
+* **Smart Sorting Options**:
+  * `Newest`: Latest additions
+  * `Price: Low to High` / `Price: High to Low`
+  * `Highest Rated`: Top customer satisfaction
+  * `Alphabetical`: A to Z sorting
+* **Empty State Handling**: Friendly, actionable empty state with a 1-click filter reset button when queries yield no results.
 
-##  Filtering System
+### 3. 🎯 Native Drag-and-Drop Shopping
+* **Desktop Drag Support**: Drag any product card to invoke the floating drop-zone tray.
+* **Interactive Visual Feedback**: Elevation changes, scale animations, and drop-zone state shifts (`dragover`, `drop`, `success`).
+* **Haptic UI Feedback**: Instant badge pulse and cart counter increment upon successful drop.
 
-Users can filter products by:
+### 4. 🛒 Dual Cart Experience (Drawer + Full Page)
+* **Sliding Cart Drawer**: Fast slide-out overlay for quick item reviews and immediate checkout initiation.
+* **Dedicated Cart Page (`#view-cart`)**: Full-screen shopping cart layout for comprehensive item management.
+* **Item Controls**: Instant quantity adjustment (`+` / `-`), individual item deletion, and "Clear Cart" reset.
+* **LocalStorage Persistence**: Full cart state survives browser refreshes and tab closures.
 
-* Category
-* Price Range
-* Ratings
 
-Supports:
 
-* Multiple filters together
-* Dynamic filtered results
-
----
-
-##  Shopping Cart
-
-* Add products to cart
-* Remove products from cart
-* Increase/decrease quantity
-* Auto-update total price
-* Display cart item count
-* Empty cart handling
-
----
-
-##  Drag and Drop
-
-* Drag product cards into cart
-* Visual feedback during drag
-* Instant cart updates after drop
-
----
-
-##  Checkout System
 
 Validated checkout form including:
 
